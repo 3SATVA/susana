@@ -3,6 +3,7 @@ import { computeResult } from "@/lib/scoring";
 import { parseLeadInput } from "@/lib/validation";
 import { buildLeadRow } from "@/lib/lead";
 import { saveLead, storageMode, syncMailerLite } from "@/lib/storage";
+import { syncEmailBoss } from "@/lib/email-boss";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -33,7 +34,9 @@ export async function POST(req: Request) {
     );
   }
 
-  const mailerlite = await syncMailerLite(row);
+  // Optional integrations run only after the lead is safely stored, and never fail the request.
+  const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || null;
+  const [mailerlite, emailBoss] = await Promise.all([syncMailerLite(row), syncEmailBoss(row, ip)]);
 
-  return NextResponse.json({ ok: true, resultType, scores, stored, storage: storageMode(), mailerlite });
+  return NextResponse.json({ ok: true, resultType, scores, stored, storage: storageMode(), mailerlite, emailBoss });
 }

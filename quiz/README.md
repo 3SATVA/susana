@@ -33,6 +33,9 @@ Env vars (server-only; set in Vercel, never commit):
 | `SUPABASE_DB_URL` | Fallback when no service key is set: Postgres URL(s) for the insert-only `quiz_writer` role (space-separate several to try in order) |
 | `MAILERLITE_API_KEY` | Optional: upsert subscriber into MailerLite with field `fertility_type` |
 | `MAILERLITE_GROUP_<TYPE>` / `MAILERLITE_GROUP_ID` | Optional group per result type (`BLOOD_DEFICIENCY`, `KIDNEY_YIN`, `KIDNEY_YANG`, `LIVER_QI_STAGNATION`, `DAMPNESS_ACCUMULATION`, `BLOOD_STASIS`) or one group for all |
+| `EMAIL_BOSS_URL` | Optional: email_boss deployment URL (e.g. `https://email-boss.vercel.app`). With `EMAIL_BOSS_KEY`, each stored lead is also sent to email_boss `/api/subscribe` (source `fertility-quiz`, tags `seq:fertility-type-quiz` + `quiz:<result_type>`, custom fields `fertility_type`, `fertility_type_id`, UTMs). Unset = no-op |
+| `EMAIL_BOSS_KEY` | Optional: the YoniSync brand key from `npm run brand:key -- yonisync` in email_boss (server-side only) |
+| `EMAIL_BOSS_TIMEOUT_MS` | Optional, default 3000. The email_boss call runs after the Supabase insert, never blocks longer than this and never fails the quiz |
 | `NEXT_PUBLIC_ALLOW_INDEXING` | `true` to allow search indexing (Typeform original had indexing off, so default is `noindex`) |
 | `NEXT_PUBLIC_SITE_URL` | Canonical URL for OG tags (defaults to the Vercel production URL) |
 
