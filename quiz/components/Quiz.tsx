@@ -317,7 +317,8 @@ export default function Quiz() {
             {submitError && s === step && <ErrorBox>{submitError}</ErrorBox>}
             <div className="actions">
               <button type="submit" className="btn btn-primary btn-submit" disabled={submitting} aria-busy={submitting}>
-                {submitting ? <span className="spinner" aria-label="Saving" /> : CONTACT_SUBMIT_LABEL}
+                <span className="btn-label">{CONTACT_SUBMIT_LABEL}</span>
+                {submitting && <span className="spinner" aria-label="Saving" />}
               </button>
             </div>
             <MobileBar>
@@ -325,7 +326,8 @@ export default function Quiz() {
                 <Chevron dir="left" />
               </button>
               <button type="submit" className="btn btn-primary btn-block btn-submit" disabled={submitting} aria-busy={submitting}>
-                {submitting ? <span className="spinner" aria-label="Saving" /> : CONTACT_SUBMIT_LABEL}
+                <span className="btn-label">{CONTACT_SUBMIT_LABEL}</span>
+                {submitting && <span className="spinner" aria-label="Saving" />}
               </button>
             </MobileBar>
           </form>

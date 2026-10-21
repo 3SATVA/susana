@@ -1,9 +1,10 @@
 """Headless walkthrough + screenshots.
 usage: python3 scripts/e2e_screens.py <base_url> <out_dir> <email> [pattern=CACBCBACCCBB]
 Completes the quiz on desktop (1440x900) and mobile (iPhone 13, 390x664 CSS px, like the Typeform capture).
-Only the desktop run submits the lead; the mobile run intercepts /api/lead locally so a single test row is created.
+Only the desktop run submits the lead unless MOBILE_REAL=1; otherwise the mobile run intercepts /api/lead
+(first attempt fails, second succeeds) to exercise error + retry without writing a row.
 """
-import json, sys, time
+import json, os, sys, time
 from playwright.sync_api import sync_playwright
 
 base, out, email = sys.argv[1], sys.argv[2], sys.argv[3]
@@ -90,5 +91,5 @@ def run(p, name, viewport, mobile, submit_for_real):
 
 with sync_playwright() as p:
     run(p, "desktop", {"width": 1440, "height": 900}, False, True)
-    run(p, "mobile", {"width": 390, "height": 664}, True, False)
+    run(p, "mobile", {"width": 390, "height": 664}, True, os.environ.get("MOBILE_REAL") == "1")
 print(json.dumps(results, indent=1))

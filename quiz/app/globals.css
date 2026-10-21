@@ -123,7 +123,9 @@ button { font-family: inherit; }
 .btn-primary { background: var(--button); color: var(--button-text); box-shadow: rgba(0, 0, 0, 0.1) 0 3px 12px 0; }
 .btn-primary:focus-visible { outline: 2px solid var(--answer); outline-offset: 2px; }
 .btn:disabled { cursor: default; opacity: 0.75; }
-.btn-submit { white-space: nowrap; min-width: 120px; }
+.btn-submit { position: relative; white-space: nowrap; }
+.btn-submit[aria-busy="true"] .btn-label { visibility: hidden; }
+.btn-submit .spinner { position: absolute; left: 50%; top: 50%; margin: -9px 0 0 -9px; }
 .hint { font-size: 14px; line-height: 18px; color: rgb(47, 47, 46); }
 .hint strong { font-weight: 700; }
 .spinner {
@@ -200,7 +202,7 @@ button { font-family: inherit; }
   .btn { height: 44px; font-size: 20px; line-height: 26px; letter-spacing: -0.25px; }
   .btn-block { flex: 1; }
   .btn-back { width: 44px; flex: none; padding: 0; }
-  .btn-submit { font-size: 17px; letter-spacing: -0.2px; padding: 0 10px; min-width: 0; }
+  .btn-submit { font-size: 17px; letter-spacing: -0.2px; padding: 0 10px; }
   .btn-back .chev { width: 16px; height: 10px; }
   .ending { padding: 40px 0 64px; }
   .ending-text { font-size: 20px; line-height: 26px; letter-spacing: -0.25px; }
