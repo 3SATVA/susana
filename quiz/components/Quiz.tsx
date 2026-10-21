@@ -2,18 +2,19 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Markdown } from "./Markdown";
-import { CONTACT, INTRO, QUESTIONS, RESULTS, REVEAL } from "@/lib/content";
+import { CONTACT, INTRO, QUESTIONS, RESULTS } from "@/lib/content";
+import {
+  CONTACT_STEP,
+  CONTACT_SUBMIT_LABEL,
+  FIRST_Q,
+  INTRO_STEP,
+  LAST_Q,
+  PROGRESS_TOTAL,
+  RESULT_STEP,
+} from "@/lib/flow";
 import { computeResult, type Answer, type ResultTypeId } from "@/lib/scoring";
 import { isValidEmail } from "@/lib/validation";
 
-// Screen order (same as the Typeform): intro, Q1..Q12, contact (#13), reveal statement, result
-const INTRO_STEP = 0;
-const FIRST_Q = 1;
-const LAST_Q = QUESTIONS.length; // 12
-const CONTACT_STEP = LAST_Q + 1; // 13
-const REVEAL_STEP = CONTACT_STEP + 1; // 14
-const RESULT_STEP = REVEAL_STEP + 1; // 15
-const PROGRESS_TOTAL = QUESTIONS.length + 1; // 12 questions + contact info
 const KEYS = ["A", "B", "C"];
 const TRANSITION_MS = 500;
 
@@ -92,7 +93,10 @@ export default function Quiz() {
     [answers, go],
   );
 
-  const submitContact = useCallback(() => {
+  const submit = useCallback(async () => {
+    if (submitting) return;
+    const firstUnanswered = answers.findIndex((a) => a === null);
+    if (firstUnanswered >= 0) return go(firstUnanswered + 1);
     if (!email.trim()) {
       setEmailError("Please fill this in");
       emailRef.current?.focus();
@@ -104,16 +108,6 @@ export default function Quiz() {
       return;
     }
     setEmailError(null);
-    setContactDone(true);
-    (document.activeElement as HTMLElement | null)?.blur();
-    go(REVEAL_STEP);
-  }, [email, go]);
-
-  const submit = useCallback(async () => {
-    if (submitting) return;
-    const firstUnanswered = answers.findIndex((a) => a === null);
-    if (firstUnanswered >= 0) return go(firstUnanswered + 1);
-    if (!isValidEmail(email)) return go(CONTACT_STEP);
     setSubmitting(true);
     setSubmitError(null);
     try {
@@ -132,6 +126,8 @@ export default function Quiz() {
       const data = await res.json().catch(() => null);
       if (!res.ok || !data?.ok) throw new Error(data?.error || "We couldn't save your answers. Please try again.");
       const type: ResultTypeId = data.resultType ?? computeResult(answers as Answer[]).resultType;
+      (document.activeElement as HTMLElement | null)?.blur();
+      setContactDone(true);
       setResult(type);
       go(RESULT_STEP);
     } catch (e) {
@@ -162,14 +158,11 @@ export default function Quiz() {
       } else if (step >= FIRST_Q && step <= LAST_Q && !inInput) {
         e.preventDefault();
         okQuestion(step - 1);
-      } else if (step === REVEAL_STEP) {
-        e.preventDefault();
-        submit();
       }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [choose, go, leaving, okQuestion, step, submit]);
+  }, [choose, go, leaving, okQuestion, step]);
 
   const answeredCount = answers.filter((a) => a !== null).length + (contactDone ? 1 : 0);
   const progress = answeredCount / PROGRESS_TOTAL;
@@ -239,18 +232,10 @@ export default function Quiz() {
               })}
             </div>
             {error && s === step && <ErrorBox>{error}</ErrorBox>}
-            <div className="actions">
-              <button type="button" className="btn btn-primary" onClick={() => okQuestion(q)}>
-                OK
-              </button>
-            </div>
           </div>
           <MobileBar>
             <button type="button" className="btn btn-primary btn-back" aria-label="Previous" onClick={() => go(s - 1)}>
               <Chevron dir="left" />
-            </button>
-            <button type="button" className="btn btn-primary btn-block" onClick={() => okQuestion(q)}>
-              OK
             </button>
           </MobileBar>
         </Screen>
@@ -265,7 +250,7 @@ export default function Quiz() {
             noValidate
             onSubmit={(e) => {
               e.preventDefault();
-              submitContact();
+              submit();
             }}
           >
             <h2 className="title">
@@ -329,49 +314,21 @@ export default function Quiz() {
               onChange={(e) => setHoneypot(e.target.value)}
             />
             {emailError && s === step && <ErrorBox>{emailError}</ErrorBox>}
+            {submitError && s === step && <ErrorBox>{submitError}</ErrorBox>}
             <div className="actions">
-              <button type="submit" className="btn btn-primary">
-                OK
+              <button type="submit" className="btn btn-primary btn-submit" disabled={submitting} aria-busy={submitting}>
+                {submitting ? <span className="spinner" aria-label="Saving" /> : CONTACT_SUBMIT_LABEL}
               </button>
             </div>
             <MobileBar>
               <button type="button" className="btn btn-primary btn-back" aria-label="Previous" onClick={() => go(s - 1)}>
                 <Chevron dir="left" />
               </button>
-              <button type="submit" className="btn btn-primary btn-block">
-                OK
+              <button type="submit" className="btn btn-primary btn-block btn-submit" disabled={submitting} aria-busy={submitting}>
+                {submitting ? <span className="spinner" aria-label="Saving" /> : CONTACT_SUBMIT_LABEL}
               </button>
             </MobileBar>
           </form>
-        </Screen>
-      );
-    }
-
-    if (s === REVEAL_STEP) {
-      return (
-        <Screen>
-          <div className="statement">
-            <h2 className="title">
-              <Markdown text={REVEAL.title} />
-            </h2>
-          </div>
-          {submitError && s === step && <ErrorBox>{submitError}</ErrorBox>}
-          <div className="actions statement-actions">
-            <button type="button" className="btn btn-primary" onClick={submit} disabled={submitting} aria-busy={submitting}>
-              {submitting ? <span className="spinner" aria-label="Submitting" /> : REVEAL.button}
-            </button>
-            <span className="hint">
-              press <strong>Ctrl + Enter</strong> ↵
-            </span>
-          </div>
-          <MobileBar>
-            <button type="button" className="btn btn-primary btn-back" aria-label="Previous" onClick={() => go(s - 1)}>
-              <Chevron dir="left" />
-            </button>
-            <button type="button" className="btn btn-primary btn-block" onClick={submit} disabled={submitting}>
-              {submitting ? <span className="spinner" aria-label="Submitting" /> : REVEAL.button}
-            </button>
-          </MobileBar>
         </Screen>
       );
     }
@@ -427,8 +384,8 @@ export default function Quiz() {
             type="button"
             className="nav-btn nav-next"
             aria-label="Next"
-            disabled={step >= REVEAL_STEP || (step <= LAST_Q && answers[step - 1] === null) || (step === CONTACT_STEP && !contactDone)}
-            onClick={() => (step === CONTACT_STEP ? submitContact() : go(step + 1))}
+            disabled={step >= CONTACT_STEP || answers[step - 1] === null}
+            onClick={() => go(step + 1)}
           >
             <Chevron dir="down" />
           </button>

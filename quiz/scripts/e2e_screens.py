@@ -17,12 +17,16 @@ def run(p, name, viewport, mobile, submit_for_real):
     page = ctx.new_page()
     posted = []
     if not submit_for_real:
+        # First save attempt fails (to exercise error + retry), second succeeds. No real row is written.
         def fake(route):
-            body = json.loads(route.request.post_data or "{}")
-            posted.append(body)
-            # compute nothing here: ask the real scorer by calling the API would create a row, so mirror server shape
-            route.continue_() if False else route.fulfill(status=200, content_type="application/json",
-                body=json.dumps({"ok": True, "resultType": "kidney_yang", "stored": False, "storage": "mocked-in-e2e"}))
+            posted.append(json.loads(route.request.post_data or "{}"))
+            time.sleep(0.8)  # visible loading state
+            if len(posted) == 1:
+                route.fulfill(status=502, content_type="application/json",
+                              body=json.dumps({"ok": False, "error": "We couldn't save your answers. Please try again."}))
+            else:
+                route.fulfill(status=200, content_type="application/json",
+                              body=json.dumps({"ok": True, "resultType": "kidney_yang", "stored": False, "storage": "mocked-in-e2e"}))
         page.route("**/api/lead", fake)
     else:
         page.on("request", lambda r: posted.append(json.loads(r.post_data)) if r.url.endswith("/api/lead") else None)
@@ -35,6 +39,7 @@ def run(p, name, viewport, mobile, submit_for_real):
     btn.click()
     time.sleep(0.8)
     page.screenshot(path=f"{out}/{name}_02_q01.png")
+    ok_buttons_on_question = page.locator(".layer:not([aria-hidden]) button", has_text="OK").count()
     for i, ch in enumerate(pattern):
         idx = "ABC".index(ch)
         if mobile:
@@ -56,15 +61,28 @@ def run(p, name, viewport, mobile, submit_for_real):
     invalid_text = page.locator(".layer:not([aria-hidden]) .error").inner_text()
     page.fill("input[name=email]", email)
     page.screenshot(path=f"{out}/{name}_06_contact_filled.png")
-    ok.click(); time.sleep(1.0)
-    page.screenshot(path=f"{out}/{name}_07_reveal.png")
-    sub = page.locator(".layer:not([aria-hidden]) .mobile-bar .btn-block" if mobile else ".layer:not([aria-hidden]) .actions .btn").first
-    sub.click()
+    button_label = ok.inner_text()
+    page.evaluate("""() => { window.__sawSpinner = false;
+      new MutationObserver(() => { if (document.querySelector('.btn-submit .spinner')) window.__sawSpinner = true; })
+        .observe(document.body, { subtree: true, childList: true }); }""")
+    ok.click()
+    try:
+        page.wait_for_selector(".layer:not([aria-hidden]) .btn-submit .spinner", timeout=1500)
+        page.screenshot(path=f"{out}/{name}_07_contact_saving.png")
+    except Exception:
+        pass
+    retry_error = None
+    if not submit_for_real:
+        page.wait_for_selector(".layer:not([aria-hidden]) .error", timeout=10000)
+        retry_error = page.locator(".layer:not([aria-hidden]) .error").inner_text()
+        page.screenshot(path=f"{out}/{name}_07b_contact_save_error.png")
+        ok.click()  # retry
     page.wait_for_selector(".ending", timeout=20000); time.sleep(1.0)
     page.screenshot(path=f"{out}/{name}_08_result.png")
     page.screenshot(path=f"{out}/{name}_09_result_full.png", full_page=True)
     result_text = page.locator(".ending-text").inner_text()
-    results[name] = {"blocked_msg": blocked_text, "invalid_msg": invalid_text, "posted": posted,
+    results[name] = {"ok_buttons_on_question": ok_buttons_on_question, "submit_label": button_label,
+                     "retry_error": retry_error, "saw_loading_spinner": page.evaluate("window.__sawSpinner"), "reveal_text_in_page": "CLICK NOW TO REVEAL" in page.content(), "blocked_msg": blocked_text, "invalid_msg": invalid_text, "posted": posted,
                      "lead_response": resp_holder.get("lead"), "result_first_line": result_text.split("\n")[0],
                      "title": page.title(), "og": page.locator("meta[property='og:image']").get_attribute("content"),
                      "robots": page.locator("meta[name=robots]").get_attribute("content")}

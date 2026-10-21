@@ -4,9 +4,10 @@ Faithful rebuild of Susana's Typeform quiz (`cL8EWv9z`, "Fertility Type") as a s
 Same copy, screen order, 12 questions (RARELY/NEVER · SOMETIMES · ALWAYS), six results, scoring and theme, without Typeform branding or the cookie banner.
 
 **Differences from the Typeform (intentional):** email is **required** (first name optional) and the lead is saved server-side before the result is shown; utm_* params are captured.
+Per Michael's feedback (2026-10-21): no OK buttons on question screens (picking an answer advances), and the "CLICK NOW TO REVEAL" / Submit screen is gone: the email screen's **REVEAL MY FERTILITY TYPE** button validates, saves and shows the result.
 
 ## Flow
-Intro → Q1–Q12 (one at a time, auto-advance, keys A/B/C + Enter) → #13 First name / Email → "CLICK NOW TO REVEAL" (Submit, Ctrl/Cmd+Enter) → POST `/api/lead` → result screen.
+Intro → Q1–Q12 (one at a time, auto-advance on click or keys A/B/C) → #13 First name / Email → **REVEAL MY FERTILITY TYPE** (validates email, POST `/api/lead`, spinner while saving, error + retry on failure) → result screen. Order lives in `lib/flow.ts`.
 
 ## Scoring
 `lib/scoring-matrix.json` is the single source of truth (copied from the Typeform logic, quirks included — e.g. Q12 SOMETIMES scores nothing).
@@ -35,7 +36,7 @@ Env vars (server-only; set in Vercel, never commit):
 | `NEXT_PUBLIC_ALLOW_INDEXING` | `true` to allow search indexing (Typeform original had indexing off, so default is `noindex`) |
 | `NEXT_PUBLIC_SITE_URL` | Canonical URL for OG tags (defaults to the Vercel production URL) |
 
-Behaviour: no storage configured → result still shows (lead not stored). Storage configured but insert fails → error on the Submit screen with retry; result is not shown. MailerLite errors are logged and never block the result.
+Behaviour: no storage configured → result still shows (lead not stored). Storage configured but insert fails → error on the email screen with retry; result is not shown. MailerLite errors are logged and never block the result.
 For MailerLite, create a custom field named `fertility_type` (text) first.
 
 ## Deploy
