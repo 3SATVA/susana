@@ -1,11 +1,11 @@
 {
   "key": "fertility-type-quiz",
   "name": "Fertility Type Quiz",
-  "description": "Replica of systeme.io campaign 'Fertiilty Type Quiz' (id 1034784). No systeme automation rule subscribes contacts to it; here it starts when someone completes the new YoniSync quiz (signup source fertility-quiz).",
+  "description": "Replica of systeme.io campaign 'Fertiilty Type Quiz' (id 1034784). No systeme automation rule subscribes contacts to it; here it starts when the YoniSync quiz adds the tag seq:fertility-type-quiz (sent on every quiz completion, so existing contacts who retake the quiz get it too; a tag only triggers once per contact).",
   "status": "paused",
   "trigger": {
-    "type": "signup_source",
-    "source": "fertility-quiz"
+    "type": "tag_added",
+    "tag": "seq:fertility-type-quiz"
   },
   "steps": [
     {
