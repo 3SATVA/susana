@@ -1,0 +1,26 @@
+{
+  "campaign": "Checklist Campaign",
+  "campaign_id": "1091223",
+  "step_id": "5476866",
+  "position": 1,
+  "subject": "Download your checklist >>",
+  "preview_text": "",
+  "sender_name": "Susana Puelles, LAc.",
+  "sender_email": "susana@yonisync.com",
+  "delay_value": "0",
+  "delay_unit": "minute",
+  "switches_time_and_weekdays_checked": [
+    "false",
+    "false"
+  ],
+  "settings_panel_text": "This email will be sent after\nDelay before sending email\nminutes\nTime when email should be sent\nDays of the week when this email should be sent",
+  "all_inputs_tail": [
+    "",
+    "",
+    "0",
+    "minute",
+    "on",
+    "on"
+  ],
+  "editor_url": "https://systeme.io/dashboard/campaigns/1091223/campaign-step/5476866/edit"
+}

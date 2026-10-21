@@ -1,0 +1,53 @@
+{
+  "$comment": "Map of Susana's systeme.io automations (captured read-only 2026-10-21) and how each maps onto the email_boss sequences in yonisync/sequences/. Source of truth for the automations flowchart site (../automations).",
+  "captured_at": "2026-10-21",
+  "sender": "Susana Puelles, LAc. <susana@yonisync.com>",
+  "delay_semantics": "Each delay counts from the previous email in the campaign (systeme: 'This email will be sent after' previous email + delay). No send-time or weekday restrictions on any email.",
+  "rules": [
+    { "n": 1, "active": true, "trigger": { "type": "funnel_form_subscribed", "label": "Funnel step form subscribed", "funnel": "Webinar (TEST)", "step": "Fertility Reg Page" },
+      "actions": [ { "type": "add_tag", "tag": "Webinar Email Collected" }, { "type": "subscribe_campaign", "campaign": "fertility-webinar-signed-up" } ] },
+    { "n": 2, "active": true, "duplicate_of": 4, "trigger": { "type": "form_subscribed", "label": "Form subscribed", "funnel": "Fertility Checklist", "step": "Optin Page - Freebie Checklist" },
+      "actions": [ { "type": "add_tag", "tag": "freebie checklist-optin" }, { "type": "subscribe_campaign", "campaign": "checklist-campaign" } ],
+      "note": "Same actions as rule #4 (different form). A contact who opts in on both forms is only enrolled once." },
+    { "n": 3, "active": true, "trigger": { "type": "page_visited", "label": "Page visited", "funnel": "Webinar", "step": "Book a Call" },
+      "actions": [ { "type": "add_tag", "tag": "Book A Call Page View" } ] },
+    { "n": 4, "active": true, "duplicate_of": 2, "trigger": { "type": "form_subscribed", "label": "Form subscribed", "funnel": "YoniSync Homepage", "step": "Yoni Sync Homepage" },
+      "actions": [ { "type": "add_tag", "tag": "freebie checklist-optin" }, { "type": "subscribe_campaign", "campaign": "checklist-campaign" } ],
+      "note": "Same actions as rule #2 (homepage form instead of the checklist opt-in page)." },
+    { "n": 5, "active": true, "trigger": { "type": "webinar_registered", "label": "Registered to webinar", "funnel": "Webinar", "step": "Fertility Webinar registration" },
+      "actions": [ { "type": "subscribe_campaign", "campaign": "fertility-webinar-signed-up" }, { "type": "add_tag", "tag": "Webinar Email Collected" } ] },
+    { "n": 6, "active": true, "trigger": { "type": "form_subscribed", "label": "Form subscribed", "funnel": "Yoni Flow", "step": "Yoni Sync Flow Sales Page" },
+      "actions": [ { "type": "send_email", "sequence": "yoni-flow-welcome" } ],
+      "note": "Sends the purchase welcome to anyone who submits the form on the sales page, before (or without) buying. Probably intended for the order form; please confirm." },
+    { "n": 7, "active": true, "duplicate_of": 12, "trigger": { "type": "new_sale", "label": "New sale", "funnel": "Yoni Flow", "step": "Order Form Page" },
+      "actions": [ { "type": "add_tag", "tag": "tag: yoni flow offer buyer" }, { "type": "send_email", "sequence": "yoni-flow-welcome" } ],
+      "note": "Same actions as rule #12 (and the 'Purchased Yoni Flow' workflow), on a different order page." },
+    { "n": 8, "active": false, "trigger": { "type": "page_visited", "label": "Page visited", "funnel": "Fertility Checklist", "step": "Optin Page - Freebie Checklist" },
+      "actions": [ { "type": "add_tag", "tag": "freebie checklist-optin" } ] },
+    { "n": 9, "active": true, "trigger": { "type": "page_visited", "label": "Page visited", "funnel": "Fertility Checklist", "step": "Thank You Page Yoni Flow Upsell - Free Webinar Page" },
+      "actions": [ { "type": "add_tag", "tag": "Book A Call Page View" } ],
+      "note": "Tags 'Book A Call Page View' on a thank-you/webinar page, not the Book a Call page. Possibly a copy-paste slip; please confirm." },
+    { "n": 10, "active": false, "trigger": { "type": "page_visited", "label": "Page visited", "funnel": "Fertility Checklist", "step": "Confirmation -Upsell Page Yoni Flow" },
+      "actions": [ { "type": "add_tag", "tag": "tag: yoni flow offer buyer" } ] },
+    { "n": 11, "active": true, "trigger": { "type": "form_subscribed", "label": "Form subscribed", "funnel": "Fertility Checklist", "step": "Confirmation -Upsell Page Yoni Flow" },
+      "actions": [ { "type": "add_tag", "tag": "freebie checklist-optin" } ],
+      "note": "Adds the checklist tag but does NOT subscribe to the Checklist Campaign (tags alone do not start campaigns in systeme)." },
+    { "n": 12, "active": true, "duplicate_of": 7, "trigger": { "type": "new_sale", "label": "New sale", "funnel": "Fertility Checklist", "step": "Order Page - Yoni Flow" },
+      "actions": [ { "type": "add_tag", "tag": "tag: yoni flow offer buyer" }, { "type": "send_email", "sequence": "yoni-flow-welcome" } ],
+      "note": "Same trigger and actions as the 'Purchased Yoni Flow' workflow: in systeme a buyer on this page likely received the welcome email twice." }
+  ],
+  "workflows": [
+    { "id": 420254, "name": "Purchased Yoni Flow", "active": true,
+      "trigger": { "type": "new_sale", "label": "New sale", "funnel": "Fertility Checklist", "step": "Order Page - Yoni Flow" },
+      "actions": [ { "type": "add_tag", "tag": "tag: yoni flow offer buyer" }, { "type": "send_email", "sequence": "yoni-flow-welcome" } ],
+      "note": "Workflow, not a rule. No delay step: the email goes out right after the tag is added. Duplicates rule #12." }
+  ],
+  "unlinked": [
+    { "sequence": "fertility-type-quiz", "note": "No systeme automation rule or workflow subscribes anyone to the 'Fertiilty Type Quiz' campaign. Contacts were most likely added by the Typeform integration or by hand. In email_boss it starts when someone completes the new quiz (signup source 'fertility-quiz')." }
+  ],
+  "email_boss_mapping": {
+    "subscribe_campaign": "add tag seq:<sequence-key> (each sequence's trigger is tag_added on that tag, so plain tags like 'freebie checklist-optin' never start a sequence by themselves, same as systeme)",
+    "send_email": "add tag seq:yoni-flow-welcome (one-step sequence, sent once per contact)",
+    "add_tag": "add the tag, normalised to lowercase with spaces as dashes, e.g. 'freebie checklist-optin' -> freebie-checklist-optin, 'tag: yoni flow offer buyer' -> yoni-flow-offer-buyer"
+  }
+}

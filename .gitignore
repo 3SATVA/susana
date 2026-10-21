@@ -1,0 +1,12 @@
+# temporary capture helpers / raw captures (the cleaned copy lives in emails/source-systeme)
+srv.py
+srv.log
+systeme-emails/
+# never commit contact data
+*.csv
+private-contacts/
+data/contacts*
+.env*
+!.env.example
+node_modules/
+.DS_Store

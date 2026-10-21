@@ -1,0 +1,30 @@
+{
+  "campaign": "Standalone (Purchased Yoni Flow workflow 420254; automation rules #6 and #7 send it)",
+  "template_id": "19461085",
+  "subject": "You’re in! Let’s unlock your hormonal flow 🌸",
+  "preview_text": "Welcome to My Yoni Flow Formula — your body’s about to thank you.",
+  "sender_name": "Susana Puelles",
+  "sender_email": "susana@yonisync.com",
+  "delay": "none (send-email action runs right after add-tag action in workflow)",
+  "all_inputs": [
+    "Susana Puelles",
+    "susana@yonisync.com",
+    "susana@yonisync.com",
+    "You’re in! Let’s unlock your hormonal flow 🌸",
+    "Welcome to My Yoni Flow Formula — your body’s about to thank you.",
+    "0",
+    "arial",
+    "13.5pt",
+    "",
+    "left",
+    "",
+    "0",
+    "arial",
+    "13.5pt",
+    "",
+    "left",
+    "",
+    ""
+  ],
+  "editor_url": "https://systeme.io/dashboard/workflows/420254/emails/19461085"
+}

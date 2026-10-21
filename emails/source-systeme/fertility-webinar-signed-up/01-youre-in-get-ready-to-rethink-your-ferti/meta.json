@@ -1,0 +1,26 @@
+{
+  "campaign": "Fertility Webinar Signed Up",
+  "campaign_id": "994665",
+  "step_id": "4859408",
+  "position": 1,
+  "subject": "You’re in! 🌸 Get ready to rethink your fertility journey",
+  "preview_text": "",
+  "sender_name": "Susana Puelles, L.Ac.",
+  "sender_email": "susana@yonisync.com",
+  "delay_value": "1",
+  "delay_unit": "minute",
+  "switches_time_and_weekdays_checked": [
+    "false",
+    "false"
+  ],
+  "settings_panel_text": "This email will be sent after\nDelay before sending email\nminute\nTime when email should be sent\nDays of the week when this email should be sent",
+  "all_inputs_tail": [
+    "",
+    "",
+    "1",
+    "minute",
+    "on",
+    "on"
+  ],
+  "editor_url": "https://systeme.io/dashboard/campaigns/994665/campaign-step/4859408/edit"
+}

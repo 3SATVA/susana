@@ -1,0 +1,25 @@
+{
+  "campaign": "Fertility Webinar Signed Up",
+  "campaign_id": "994665",
+  "step_id": "4875843",
+  "position": 5,
+  "subject": "Change can happen… when you tap into your weak link",
+  "preview_text": "",
+  "sender_name": "Susana Puelles, LAc.",
+  "sender_email": "susana@yonisync.com",
+  "delay_value": "1",
+  "delay_unit": "day",
+  "switches_time_and_weekdays_checked": [
+    "false",
+    "false"
+  ],
+  "settings_panel_text": "This email will be sent after\nDelay before sending email\nday\nTime when email should be sent\nDays of the week when this email should be sent",
+  "all_inputs_tail": [
+    "4859923",
+    "1",
+    "day",
+    "on",
+    "on"
+  ],
+  "editor_url": "https://systeme.io/dashboard/campaigns/994665/campaign-step/4875843/edit"
+}

@@ -1,0 +1,23 @@
+{
+  "name": "yonisync-automations",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "data": "node scripts/build-data.mjs",
+    "dev": "node scripts/build-data.mjs && next dev",
+    "build": "node scripts/build-data.mjs && next build",
+    "start": "next start",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "next": "16.4.2",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "^5.7.0"
+  }
+}
