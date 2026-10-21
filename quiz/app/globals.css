@@ -1,0 +1,205 @@
+/* Theme copied from the Typeform "Default Theme" (IVGCCIEl) + computed styles */
+:root {
+  --question: #000000;
+  --answer: #d65c99;
+  --button: #521442;
+  --button-text: #eee8ec;
+  --bg: #e7e6e1;
+  --choice-bg: rgba(237, 236, 232, 0.6);
+  --font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
+  --ease: cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; height: 100%; }
+body {
+  background: var(--bg);
+  color: var(--question);
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+button { font-family: inherit; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+
+.app { position: relative; min-height: 100vh; min-height: 100dvh; overflow: hidden; }
+.app.is-ending { overflow: visible; }
+
+/* Background photo (white orchids), fullscreen cover, lightened like Typeform's brightness 0.24 */
+.bg {
+  position: fixed; inset: 0; z-index: 0;
+  background: var(--bg) url("/background.jpg") center / cover no-repeat;
+}
+.bg::after { content: ""; position: absolute; inset: 0; background: rgba(255, 255, 255, 0.3); }
+
+/* Progress bar */
+.progress { position: fixed; top: 0; left: 0; right: 0; z-index: 5; padding: 4px 6px; }
+.progress-track {
+  height: 3px; border-radius: 32px; overflow: hidden;
+  background: rgba(214, 92, 153, 0.4);
+}
+.progress-fill { height: 100%; background: var(--answer); border-radius: 32px; transition: width 0.5s var(--ease); }
+
+/* Screens & transitions */
+.stage { position: relative; z-index: 1; min-height: 100vh; min-height: 100dvh; }
+.app:not(.is-ending) .stage { height: 100vh; height: 100dvh; }
+.layer { position: absolute; inset: 0; }
+.is-ending .layer { position: relative; }
+.is-ending .layer.leave-next { position: absolute; }
+.screen {
+  min-height: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  overflow-y: auto; padding: 48px 0;
+}
+.content { width: 100%; max-width: 720px; margin: 0 auto; }
+
+.enter-next { animation: enterNext 0.5s var(--ease) both; }
+.enter-prev { animation: enterPrev 0.5s var(--ease) both; }
+.leave-next { animation: leaveNext 0.5s var(--ease) both; pointer-events: none; }
+.leave-prev { animation: leavePrev 0.5s var(--ease) both; pointer-events: none; }
+@keyframes enterNext { from { opacity: 0; transform: translateY(40vh); } to { opacity: 1; transform: none; } }
+@keyframes enterPrev { from { opacity: 0; transform: translateY(-40vh); } to { opacity: 1; transform: none; } }
+@keyframes leaveNext { from { opacity: 1; transform: none; filter: blur(0); } to { opacity: 0; transform: translateY(-40vh); filter: blur(4px); } }
+@keyframes leavePrev { from { opacity: 1; transform: none; filter: blur(0); } to { opacity: 0; transform: translateY(40vh); filter: blur(4px); } }
+@media (prefers-reduced-motion: reduce) {
+  .enter-next, .enter-prev, .leave-next, .leave-prev { animation-duration: 0.01s; }
+}
+
+/* Titles */
+.title {
+  margin: 0; font-size: 26px; line-height: 34px; font-weight: 400; letter-spacing: -0.5px;
+  color: var(--question); position: relative; overflow-wrap: break-word;
+}
+.title strong { font-weight: 700; }
+.required { margin-left: 2px; }
+.counter {
+  position: absolute; left: -26px; top: 8px;
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 16px; height: 19px; padding: 0 4px;
+  font-size: 11px; line-height: 14px; font-weight: 700; letter-spacing: normal;
+  color: #edece8; background: var(--answer); border-radius: 5px 3px;
+}
+.statement .title { white-space: normal; }
+
+/* Choices */
+.choices { display: flex; flex-direction: column; gap: 8px; margin-top: 31px; width: 256px; max-width: 100%; }
+.choice {
+  position: relative; display: flex; align-items: center; gap: 4px;
+  width: 100%; min-height: 44px; padding: 6px 10px; border: 0; border-radius: 8px;
+  background: linear-gradient(rgba(214, 92, 153, 0.1), rgba(214, 92, 153, 0.1)), var(--choice-bg);
+  box-shadow: rgba(214, 92, 153, 0.1) 0 0 0 1px inset;
+  color: var(--answer); cursor: pointer; text-align: left;
+  transition: background-color 0.1s ease-out, box-shadow 0.1s ease-out;
+}
+@media (hover: hover) {
+  .choice:hover { background: linear-gradient(rgba(214, 92, 153, 0.3), rgba(214, 92, 153, 0.3)), var(--choice-bg); }
+  .btn-primary:hover:not(:disabled) { background: #6a1a56; }
+}
+.choice:focus-visible { outline: 2px solid var(--answer); outline-offset: 2px; }
+.choice .key {
+  flex: none; display: inline-flex; align-items: center; justify-content: center;
+  width: 24px; height: 24px; border-radius: 4px; border: 1px solid rgba(214, 92, 153, 0.24);
+  background: rgba(237, 236, 232, 0.4); color: var(--answer);
+  font-size: 12px; line-height: 16px; font-weight: 600;
+}
+.choice .label { flex: 1; padding: 4px; font-size: 18px; line-height: 24px; font-weight: 400; text-transform: none; }
+.choice .check { width: 16px; height: 13px; fill: var(--answer); flex: none; margin-left: 4px; }
+.choice.selected { box-shadow: var(--answer) 0 0 0 2px inset; }
+.choice.selected .key { background: var(--answer); border-color: var(--answer); color: #edece8; }
+.choice.blink { animation: blink 0.25s steps(1, end) 2; }
+@keyframes blink { 50% { box-shadow: rgba(214, 92, 153, 0.1) 0 0 0 1px inset; } }
+
+/* Buttons */
+.actions { display: flex; align-items: center; gap: 12px; margin-top: 32px; }
+.statement-actions { margin-top: 64px; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  height: 40px; padding: 0 16px; border: 0; border-radius: 8px;
+  font-size: 18px; line-height: 24px; font-weight: 600; cursor: pointer;
+  transition: background-color 0.15s ease-out, opacity 0.15s;
+}
+.btn-primary { background: var(--button); color: var(--button-text); box-shadow: rgba(0, 0, 0, 0.1) 0 3px 12px 0; }
+.btn-primary:focus-visible { outline: 2px solid var(--answer); outline-offset: 2px; }
+.btn:disabled { cursor: default; opacity: 0.75; }
+.hint { font-size: 14px; line-height: 18px; color: rgb(47, 47, 46); }
+.hint strong { font-weight: 700; }
+.spinner {
+  width: 18px; height: 18px; border-radius: 50%;
+  border: 2px solid rgba(238, 232, 236, 0.35); border-top-color: var(--button-text);
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Contact info */
+.field { display: block; margin-top: 31px; }
+.field + .field { margin-top: 32px; }
+.field-label { display: block; font-size: 20px; line-height: 26px; letter-spacing: -0.25px; margin-bottom: 8px; color: var(--question); }
+.field input {
+  display: block; width: 100%; border: 0; border-radius: 0; outline: 0; background: transparent;
+  padding: 8px 0; font-family: inherit; font-size: 26px; line-height: 34px; letter-spacing: -0.5px;
+  color: var(--answer); box-shadow: rgba(214, 92, 153, 0.6) 0 1px 0 0; transition: box-shadow 0.1s ease-out;
+}
+.field input::placeholder { color: rgb(230, 193, 208); opacity: 1; }
+.field input:focus { box-shadow: var(--answer) 0 2px 0 0; }
+.field input[aria-invalid="true"] { box-shadow: rgb(175, 4, 4) 0 2px 0 0; }
+
+/* Error */
+.error {
+  display: inline-flex; align-items: center; gap: 6px; margin-top: 16px; padding: 4px 8px 4px 6px;
+  border-radius: 3px; background: rgb(247, 230, 230); color: rgb(175, 4, 4);
+  font-size: 14px; line-height: 20px; animation: fadeIn 0.2s ease-out;
+}
+.error svg { width: 16px; height: 16px; fill: currentColor; flex: none; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+/* Ending (result) */
+.ending { height: auto; min-height: 100vh; min-height: 100dvh; padding: 96px 0; }
+.ending-content { width: 100%; max-width: 720px; margin: 0 auto; text-align: center; }
+.ending-text { margin: 0; font-size: 26px; line-height: 34px; letter-spacing: -0.5px; font-weight: 400; color: var(--question); }
+.ending-text strong { font-weight: 700; }
+
+/* Desktop footer navigation (Typeform up/down arrows; branding removed) */
+.footer-nav { position: fixed; right: 24px; bottom: 32px; z-index: 5; display: flex; gap: 2px; }
+.nav-btn {
+  width: 32px; height: 32px; padding: 7px 8px; border: 0; background: var(--button); color: var(--button-text);
+  display: inline-flex; align-items: center; justify-content: center; cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 3px 12px 0;
+}
+.nav-btn:disabled { color: rgb(186, 161, 179); cursor: default; }
+.nav-prev { border-radius: 8px 2px 2px 8px; }
+.nav-next { border-radius: 2px 8px 8px 2px; }
+.chev { width: 14px; height: 9px; }
+
+.mobile-bar { display: none; }
+
+/* Desktop column: 720px centered (x=360 in a 1440 viewport) */
+@media (min-width: 768px) {
+  .content { padding: 0 8px; max-width: 736px; }
+  .screen:not(.ending) { padding-bottom: 104px; }
+}
+
+/* Mobile (Typeform iPhone layout) */
+@media (max-width: 767px) {
+  .screen { align-items: center; padding: 40px 0 190px; }
+  .content, .ending-content { padding: 0 32px; }
+  .title { font-size: 20px; line-height: 26px; letter-spacing: -0.25px; }
+  .counter { position: static; display: flex; width: fit-content; margin-bottom: 11px; }
+  .choices { width: 100%; margin-top: 32px; }
+  .field-label { font-size: 18px; line-height: 24px; letter-spacing: normal; }
+  .field input { font-size: 20px; line-height: 26px; letter-spacing: -0.25px; padding: 6px 0; }
+  .actions { display: none; }
+  .footer-nav { display: none; }
+  .error { margin-top: 12px; }
+  .mobile-bar {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 6;
+    display: flex; gap: 8px; padding: 12px 32px calc(32px + env(safe-area-inset-bottom));
+  }
+  .btn { height: 44px; font-size: 20px; line-height: 26px; letter-spacing: -0.25px; }
+  .btn-block { flex: 1; }
+  .btn-back { width: 44px; flex: none; padding: 0; }
+  .btn-back .chev { width: 16px; height: 10px; }
+  .ending { padding: 40px 0 64px; }
+  .ending-text { font-size: 20px; line-height: 26px; letter-spacing: -0.25px; }
+}

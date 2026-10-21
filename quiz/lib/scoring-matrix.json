@@ -1,0 +1,251 @@
+{
+  "_comment": "Faithful copy of the Typeform 'Fertility Type' outcome logic (form cL8EWv9z, captured 2026-10-21). Each answer adds +1 to every result type listed. Tie-break = order of `types` (first wins). Edit here for the later scoring audit.",
+  "types": [
+    {
+      "id": "blood_deficiency",
+      "label": "Blood Deficiency"
+    },
+    {
+      "id": "kidney_yin",
+      "label": "Kidney Yin"
+    },
+    {
+      "id": "kidney_yang",
+      "label": "Kidney Yang"
+    },
+    {
+      "id": "liver_qi_stagnation",
+      "label": "Liver Qi Stagnation"
+    },
+    {
+      "id": "dampness_accumulation",
+      "label": "Dampness Accumulation"
+    },
+    {
+      "id": "blood_stasis",
+      "label": "Blood Stasis"
+    }
+  ],
+  "choices": [
+    "RARELY/NEVER",
+    "SOMETIMES",
+    "ALWAYS"
+  ],
+  "questions": [
+    {
+      "q": 1,
+      "title": "I often feel cold in my hands, feet, or lower back",
+      "points": {
+        "RARELY/NEVER": [
+          "kidney_yin",
+          "blood_stasis"
+        ],
+        "SOMETIMES": [
+          "liver_qi_stagnation"
+        ],
+        "ALWAYS": [
+          "blood_deficiency",
+          "kidney_yang",
+          "dampness_accumulation"
+        ]
+      }
+    },
+    {
+      "q": 2,
+      "title": "I feel warm or hot at night & often experience night sweats",
+      "points": {
+        "RARELY/NEVER": [
+          "kidney_yang",
+          "dampness_accumulation",
+          "blood_stasis"
+        ],
+        "SOMETIMES": [
+          "blood_deficiency",
+          "liver_qi_stagnation"
+        ],
+        "ALWAYS": [
+          "kidney_yin"
+        ]
+      }
+    },
+    {
+      "q": 3,
+      "title": "My periods are heavy & my flow may be thick or have clots",
+      "points": {
+        "RARELY/NEVER": [
+          "kidney_yin"
+        ],
+        "SOMETIMES": [
+          "blood_deficiency",
+          "liver_qi_stagnation",
+          "dampness_accumulation"
+        ],
+        "ALWAYS": [
+          "kidney_yang",
+          "blood_stasis"
+        ]
+      }
+    },
+    {
+      "q": 4,
+      "title": "My periods may be shorter or lighter than normal",
+      "points": {
+        "RARELY/NEVER": [
+          "dampness_accumulation",
+          "blood_stasis"
+        ],
+        "SOMETIMES": [
+          "kidney_yin",
+          "kidney_yang",
+          "liver_qi_stagnation"
+        ],
+        "ALWAYS": [
+          "blood_deficiency"
+        ]
+      }
+    },
+    {
+      "q": 5,
+      "title": "I need heat/warmth during my periods",
+      "points": {
+        "RARELY/NEVER": [
+          "kidney_yin"
+        ],
+        "SOMETIMES": [
+          "liver_qi_stagnation",
+          "dampness_accumulation",
+          "blood_stasis"
+        ],
+        "ALWAYS": [
+          "blood_deficiency",
+          "kidney_yang"
+        ]
+      }
+    },
+    {
+      "q": 6,
+      "title": "I frequently have tight shoulders, or experience neck pain",
+      "points": {
+        "RARELY/NEVER": [
+          "dampness_accumulation"
+        ],
+        "SOMETIMES": [
+          "blood_deficiency",
+          "kidney_yin",
+          "kidney_yang",
+          "blood_stasis"
+        ],
+        "ALWAYS": [
+          "liver_qi_stagnation"
+        ]
+      }
+    },
+    {
+      "q": 7,
+      "title": "I have a low libido or decreased sexual drive",
+      "points": {
+        "RARELY/NEVER": [
+          "kidney_yin"
+        ],
+        "SOMETIMES": [
+          "dampness_accumulation",
+          "blood_stasis"
+        ],
+        "ALWAYS": [
+          "blood_deficiency",
+          "kidney_yang",
+          "liver_qi_stagnation"
+        ]
+      }
+    },
+    {
+      "q": 8,
+      "title": "My basal body temperature tends to be lower than average",
+      "points": {
+        "RARELY/NEVER": [
+          "kidney_yin",
+          "dampness_accumulation"
+        ],
+        "SOMETIMES": [
+          "blood_deficiency",
+          "liver_qi_stagnation",
+          "blood_stasis"
+        ],
+        "ALWAYS": [
+          "kidney_yang"
+        ]
+      }
+    },
+    {
+      "q": 9,
+      "title": "I experience PMS, including irritability or breast tenderness",
+      "points": {
+        "RARELY/NEVER": [
+          "dampness_accumulation",
+          "blood_stasis"
+        ],
+        "SOMETIMES": [
+          "blood_deficiency",
+          "kidney_yin"
+        ],
+        "ALWAYS": [
+          "kidney_yang",
+          "liver_qi_stagnation"
+        ]
+      }
+    },
+    {
+      "q": 10,
+      "title": "I often experience lethargy and feel \"heavy\" or sluggish",
+      "points": {
+        "RARELY/NEVER": [
+          "blood_stasis"
+        ],
+        "SOMETIMES": [
+          "blood_deficiency",
+          "kidney_yin"
+        ],
+        "ALWAYS": [
+          "kidney_yang",
+          "liver_qi_stagnation",
+          "dampness_accumulation"
+        ]
+      }
+    },
+    {
+      "q": 11,
+      "title": "I have endometriosis, fibroids, or ovarian cysts",
+      "points": {
+        "RARELY/NEVER": [
+          "blood_deficiency",
+          "kidney_yin"
+        ],
+        "SOMETIMES": [
+          "kidney_yang"
+        ],
+        "ALWAYS": [
+          "liver_qi_stagnation",
+          "dampness_accumulation",
+          "blood_stasis"
+        ]
+      }
+    },
+    {
+      "q": 12,
+      "title": "I crave sweet, greasy, or fatty foods",
+      "points": {
+        "RARELY/NEVER": [
+          "blood_deficiency",
+          "kidney_yin",
+          "blood_stasis"
+        ],
+        "SOMETIMES": [],
+        "ALWAYS": [
+          "kidney_yang",
+          "liver_qi_stagnation",
+          "dampness_accumulation"
+        ]
+      }
+    }
+  ]
+}

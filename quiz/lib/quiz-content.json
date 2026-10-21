@@ -1,0 +1,158 @@
+{
+  "_source": "Exact copy from Typeform form.json (form cL8EWv9z). Markdown: *text* = bold, \\n = line break.",
+  "intro": {
+    "title": "*Hey Girl, *\n\n*It's time to fast track your fertility, naturally...*\n*To do that, you've got to know your FERTILITY TYPE! *\n\n*Knowing your TYPE, helps target specific herbs, supplements, foods & lifestyle optimizers!  Cold smoothies + salads may not be for you babe!*\n\n*DISCOVER YOUR UNIQUE FERTILITY TYPE*",
+    "button": "TAKE THE QUIZ >>"
+  },
+  "questions": [
+    {
+      "ref": "01JF2WZDR9MWG2WSZ5M6N5YR6D",
+      "title": "I often feel cold in my hands, feet, or lower back",
+      "choices": [
+        "RARELY/NEVER",
+        "SOMETIMES",
+        "ALWAYS"
+      ]
+    },
+    {
+      "ref": "7879ddc0-60e6-42c6-8476-4d3933445427",
+      "title": "I feel warm or hot at night & often experience night sweats",
+      "choices": [
+        "RARELY/NEVER",
+        "SOMETIMES",
+        "ALWAYS"
+      ]
+    },
+    {
+      "ref": "dd4be6ff-826b-4ba2-a0ca-01c3bf14f09f",
+      "title": "My periods are heavy & my flow may be thick or have clots",
+      "choices": [
+        "RARELY/NEVER",
+        "SOMETIMES",
+        "ALWAYS"
+      ]
+    },
+    {
+      "ref": "c0925acd-1680-46cc-88fe-81d1ee0ac240",
+      "title": "My periods may be shorter or lighter than normal",
+      "choices": [
+        "RARELY/NEVER",
+        "SOMETIMES",
+        "ALWAYS"
+      ]
+    },
+    {
+      "ref": "a4e6560c-59f3-4ebb-831e-e365d8135b69",
+      "title": "I need heat/warmth during my periods",
+      "choices": [
+        "RARELY/NEVER",
+        "SOMETIMES",
+        "ALWAYS"
+      ]
+    },
+    {
+      "ref": "879977e8-c07c-4df7-8c08-816d0f1665c3",
+      "title": "I frequently have tight shoulders, or experience neck pain",
+      "choices": [
+        "RARELY/NEVER",
+        "SOMETIMES",
+        "ALWAYS"
+      ]
+    },
+    {
+      "ref": "0acc8eed-baf4-4d7d-a3a1-6156d8746200",
+      "title": "I have a low libido or decreased sexual drive",
+      "choices": [
+        "RARELY/NEVER",
+        "SOMETIMES",
+        "ALWAYS"
+      ]
+    },
+    {
+      "ref": "7da6dd6d-f434-4b22-ba4e-ae81515dd380",
+      "title": "My basal body temperature tends to be lower than average",
+      "choices": [
+        "RARELY/NEVER",
+        "SOMETIMES",
+        "ALWAYS"
+      ]
+    },
+    {
+      "ref": "fb0d8f39-7df9-44a6-b712-66d0113235d5",
+      "title": "I experience PMS, including irritability or breast tenderness",
+      "choices": [
+        "RARELY/NEVER",
+        "SOMETIMES",
+        "ALWAYS"
+      ]
+    },
+    {
+      "ref": "0c03f610-ba4f-4ce9-9db9-65a6abdb009e",
+      "title": "I often experience lethargy and feel \"heavy\" or sluggish",
+      "choices": [
+        "RARELY/NEVER",
+        "SOMETIMES",
+        "ALWAYS"
+      ]
+    },
+    {
+      "ref": "53b777f7-766c-4b4d-a156-1b4604c0a033",
+      "title": "I have endometriosis, fibroids, or ovarian cysts",
+      "choices": [
+        "RARELY/NEVER",
+        "SOMETIMES",
+        "ALWAYS"
+      ]
+    },
+    {
+      "ref": "cef78520-2fb9-4086-8fbf-1fcbe7d9eea6",
+      "title": "I crave sweet, greasy, or fatty foods",
+      "choices": [
+        "RARELY/NEVER",
+        "SOMETIMES",
+        "ALWAYS"
+      ]
+    }
+  ],
+  "contact": {
+    "title": "Fill this out to reveal your FERTILITY TYPE",
+    "firstName": {
+      "label": "First name",
+      "placeholder": "Jane"
+    },
+    "email": {
+      "label": "Email",
+      "placeholder": "name@example.com"
+    }
+  },
+  "reveal": {
+    "title": "CLICK NOW TO REVEAL ",
+    "button": "Submit"
+  },
+  "results": {
+    "blood_deficiency": {
+      "ref": "thankyou-screen",
+      "title": "*Blood Deficiency is Your PRIMARY Fertility Type!*\n\nKnowing your fertility type helps set the foundation for a personalized holistic approach using specific herbs, supplements, nutrition and other lifestyle optimizers that are specific to your body.\n\nStart With These Tips: \n\n*Lifestyle Tips:*\nEnsure adequate rest and gentle exercise to improve circulation without overexertion. Yoga and gentle stretching help nourish the blood and reduce stress.\n\n*Food Tips:*\nFocus on building and nourishing blood with foods like leafy greens, beets, and dates. Try to consume meals at regular times to promote digestive health.\n\nMake sure to watch out for my newsletter in your inbox! I have more goodies for you"
+    },
+    "kidney_yin": {
+      "ref": "87d6b4fa-8561-425d-a612-73032d49f7bf",
+      "title": "*Kidney Yin is Your PRIMARY Fertility Type!*\n\nKnowing your fertility type helps set the foundation for a personalized holistic approach using specific herbs, supplements, nutrition and other lifestyle optimizers that are specific to your body.\n\nStart With These Tips: \n\n*Lifestyle Tips:*\nPractice stress-relieving activities like meditation, Tai Chi, and Qi Gong to preserve Yin energy. Avoid excessive caffeine or stimulants, which can deplete Yin.\n\n*Food Tips:*\nFocus on nourishing and hydrating foods. Include sesame seeds, asparagus, and goji berries. Avoid overly spicy, hot, or drying foods, as these can exacerbate Yin deficiency.\n\nMake sure to watch out for my newsletter in your inbox! I have more goodies for you"
+    },
+    "kidney_yang": {
+      "ref": "86453bf5-2e5a-4bdb-b188-6970c853fabf",
+      "title": "*Kidney Yang is Your PRIMARY Fertility Type!*\n\nKnowing your fertility type helps set the foundation for a personalized holistic approach using specific herbs, supplements, nutrition and other lifestyle optimizers that are specific to your body.\n\nStart With These Tips: \n\n*Lifestyle Tips:*\nPrioritize warmth by wearing layers, especially around the lower back and abdomen. Engage in gentle activities like walking, yoga, and warm baths to invigorate circulation.\n\n*Food Tips:*\nFocus on warm, nourishing foods that strengthen Yang energy.\nTry lamb, ginger, cinnamon & walnuts.\nStews are ideal, especially with warming spices.\nLimit iced drinks, as these can weaken Yang energy.\n\nMake sure to watch out for my newsletter in your inbox! I have more goodies for you"
+    },
+    "liver_qi_stagnation": {
+      "ref": "4019bdb1-030d-4e7e-a0ed-9bee82f46057",
+      "title": "*Liver Qi Stagnation is Your PRIMARY Fertility Type!*\n\nKnowing your fertility type helps set the foundation for a personalized holistic approach using specific herbs, supplements, nutrition and other lifestyle optimizers that are specific to your body.\n\nStart With These Tips: \n\n*Lifestyle Tips:*\nEngage in stress-relief practices like journaling, breathing exercises, or creative activities. Physical activities like walking or dancing can help release pent-up energy and tension.\n\n*Food Tips:*\nChoose foods that cleanse, such as leafy greens and citrus fruits.\nMinimize greasy, fatty, and processed foods, which can contribute to stagnation.\n\nMake sure to watch out for my newsletter in your inbox! I have more goodies for you!"
+    },
+    "dampness_accumulation": {
+      "ref": "db87b7d6-6e99-4dba-a619-4412425bfdd0",
+      "title": "*Dampness Accumulation is Your PRIMARY Fertility Type!*\n\nKnowing your fertility type helps set the foundation for a personalized holistic approach using specific herbs, supplements, nutrition and other lifestyle optimizers that are specific to your body.\n\nStart With These Tips: \n\n*Lifestyle Tips:*\nRegular, gentle exercise like walking or stretching can help dispel Dampness. Avoid excessive humidity when possible.\n\n*Food Tips:*\nFocus on cooked vegetables & lean proteins. Avoid dairy.\nOpt for cooked foods over raw to support digestion.\nAn apple a day works wonders to dissolve digestive dampness.\n\nMake sure to watch out for my newsletter in your inbox! I have more goodies for you"
+    },
+    "blood_stasis": {
+      "ref": "5783e677-f078-49a5-80e4-5e6e428b0e16",
+      "title": "*Blood Stasis is Your PRIMARY Fertility Type!*\n\nKnowing your fertility type helps set the foundation for a personalized holistic approach using specific herbs, supplements, nutrition and other lifestyle optimizers that are specific to your body.\n\nStart With These Tips: \n\n*Lifestyle Tips:*\nEngage in gentle, regular physical activity like swimming, or light cardio to improve blood flow. Womb massages may help with circulation.\n\n*Food Tips:*\nFocus on foods that invigorate blood and circulation,\nsuch as dark leafy greens, beets, turmeric, and fatty fish.\nAvoid excessive red meat, and overly fatty or rich foods, which can worsen stagnation.\n\nMake sure to watch out for my newsletter in your inbox! I have more goodies for you"
+    }
+  }
+}
