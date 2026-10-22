@@ -13,7 +13,9 @@ Not for public use: the site is `noindex`, robots.txt disallows everything, and 
   the ingredient, step and note counts match the Spanish.
 * `supabase/schema.sql`: an optional table shape for later. Nothing has been created.
 
-Env: `RECIPES_PASSWORD` (set in Vercel only, never commit it). The source photos are gitignored and never published.
+Env (Vercel only, never commit): `RECIPES_PASSWORD`, and `RECIPES_DB_URL`, the Supabase pooler URL(s) for the least-privilege role `recipes_app`.
+
+**Stars:** double-click a card on desktop, or press and hold it on a phone, to star it. The star button does the same. Stars are shared through `public.recipe_stars` in the Supabase project `susana`, which has RLS on and no anon policies; see `supabase/migrations/`. Only `/api/stars` reads or writes them, after it checks the password cookie. The browser keeps a localStorage cache and queues changes when the API is down. The source photos are gitignored and never published.
 
 ```
 npm install && RECIPES_PASSWORD=dev npm run dev

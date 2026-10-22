@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Header from "@/components/Header";
 import PrintButton from "@/components/PrintButton";
+import StarButton from "@/components/StarButton";
 import { byId, recipes, COURSE_LABEL, TYPE_LABEL, pagesLabel, type Group } from "@/lib/data";
 
 export function generateStaticParams() {
@@ -44,6 +45,7 @@ export default async function RecipePage({ params }: { params: Promise<{ id: str
       <div className="tools noprint">
         <Link href="/">← All recipes</Link>
         <PrintButton />
+        <StarButton id={r.id} title={r.title_es} />
       </div>
       <h1>{r.title_es}</h1>
       <p className="lead" style={{ fontSize: 18 }}>{r.subtitle}</p>
