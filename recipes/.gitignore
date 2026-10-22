@@ -1,0 +1,22 @@
+node_modules/
+.next/
+next-env.d.ts
+*.tsbuildinfo
+.vercel
+.env*
+# source photos of the printed book: never commit or publish
+menus_small/
+menus_small.zip
+up/
+rot/
+ocr/
+*.jpg
+*.jpeg
+*.png
+*.zip
+# scratch helpers from transcription
+rotations.txt
+osd_up.txt
+ori.txt
+ori_all.txt
+__pycache__/
