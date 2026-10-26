@@ -3,6 +3,7 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import PrintButton from "@/components/PrintButton";
 import StarButton from "@/components/StarButton";
+import RecipeTags from "@/components/RecipeTags";
 import { byId, recipes, COURSE_LABEL, TYPE_LABEL, pagesLabel, type Group } from "@/lib/data";
 
 export function generateStaticParams() {
@@ -51,10 +52,11 @@ export default async function RecipePage({ params }: { params: Promise<{ id: str
       <p className="lead" style={{ fontSize: 18 }}>{r.subtitle}</p>
       <div className="tagrow">
         <span className="pill">{COURSE_LABEL[r.course]}</span>
-        {r.cycle_phases.length ? r.cycle_phases.map((p) => <span className="pill" key={p}>{p}</span>) : <span className="pill ghost">Cycle phase: untagged</span>}
-        {r.fertility_types.length ? r.fertility_types.map((t) => <span className="pill" key={t}>{TYPE_LABEL[t] ?? t}</span>) : <span className="pill ghost">Fertility type: untagged</span>}
+        {r.cycle_phases.map((p) => <span className="pill" key={p}>{p}</span>)}
+        {r.fertility_types.map((t) => <span className="pill" key={t}>{TYPE_LABEL[t] ?? t}</span>)}
         {r.tags.map((t) => <span className="pill" key={t}>#{t}</span>)}
       </div>
+      <RecipeTags recipeId={r.id} />
       {r.uncertain.map((u, i) => <div className="warn" key={i}><b>Check the original:</b> {u}</div>)}
       <div className="recipe">
         <aside className="box ing">

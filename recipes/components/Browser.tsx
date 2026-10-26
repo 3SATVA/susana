@@ -3,6 +3,10 @@ import { useMemo, useState, useEffect } from "react";
 import RecipeCard from "@/components/RecipeCard";
 import StarIcon from "@/components/StarIcon";
 import { useStars } from "@/lib/stars-client";
+import TagChip from "@/components/TagChip";
+import TagManager from "@/components/TagManager";
+import RecipeTags from "@/components/RecipeTags";
+import { CATEGORY_LABEL, CATEGORY_ORDER, useTags } from "@/lib/tags-client";
 
 export type Item = {
   id: string; es: string; en: string; course: string; section: string;
@@ -15,41 +19,57 @@ function norm(s: string) {
   return s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 }
 
-export default function Browser({ items, phases, types, typeLabels }: {
-  items: Item[]; phases: string[]; types: string[]; typeLabels: Record<string, string>;
-}) {
+export default function Browser({ items, typeLabels }: { items: Item[]; typeLabels: Record<string, string> }) {
   const [q, setQ] = useState("");
   const [course, setCourse] = useState("");
-  const [phase, setPhase] = useState("");
-  const [ftype, setFtype] = useState("");
+  const [sel, setSel] = useState<string[]>([]); // tag slugs (AND); "__untagged" = recipes with no tags
+  const [manage, setManage] = useState(false);
+  const { tags, byRecipe, status: tagStatus } = useTags();
   const [onlyStarred, setOnlyStarred] = useState(false);
   const [starredFirst, setStarredFirst] = useState(true);
   const { stars, order, status } = useStars();
 
   useEffect(() => {
     const p = new URLSearchParams(window.location.search);
-    setQ(p.get("q") ?? ""); setCourse(p.get("course") ?? ""); setPhase(p.get("phase") ?? ""); setFtype(p.get("type") ?? "");
+    setQ(p.get("q") ?? ""); setCourse(p.get("course") ?? ""); setSel((p.get("tags") ?? "").split(",").filter(Boolean));
     setOnlyStarred(p.get("starred") === "1");
     try { setStarredFirst(localStorage.getItem("yr_starred_first") !== "0"); } catch {}
   }, []);
   useEffect(() => { try { localStorage.setItem("yr_starred_first", starredFirst ? "1" : "0"); } catch {} }, [starredFirst]);
   useEffect(() => {
     const p = new URLSearchParams();
-    if (q) p.set("q", q); if (course) p.set("course", course); if (phase) p.set("phase", phase); if (ftype) p.set("type", ftype); if (onlyStarred) p.set("starred", "1");
+    if (q) p.set("q", q); if (course) p.set("course", course); if (sel.length) p.set("tags", sel.join(",")); if (onlyStarred) p.set("starred", "1");
     const s = p.toString();
     window.history.replaceState(null, "", s ? `?${s}` : window.location.pathname);
-  }, [q, course, phase, ftype, onlyStarred]);
+  }, [q, course, sel, onlyStarred]);
+
+  const slugToId = useMemo(() => new Map(tags.map((t) => [t.slug, t.id])), [tags]);
+  // unknown slugs (e.g. a deleted tag still in the URL) are ignored once tags have loaded
+  const selIds = useMemo(() => sel.filter((s) => s !== "__untagged").map((s) => slugToId.get(s) ?? (tagStatus === "loading" ? s : "")).filter(Boolean), [sel, slugToId, tagStatus]);
+  const tagText = useMemo(() => {
+    const names = new Map(tags.map((t) => [t.id, norm(t.name)]));
+    return (id: string) => [...(byRecipe.get(id) ?? [])].map((t) => names.get(t) ?? "").join(" ");
+  }, [tags, byRecipe]);
+  const toggleTag = (slug: string) => setSel((cur) => {
+    if (slug === "__untagged") return cur.includes(slug) ? [] : [slug];
+    const c = cur.filter((x) => x !== "__untagged");
+    return c.includes(slug) ? c.filter((x) => x !== slug) : [...c, slug];
+  });
+  const selSet = new Set(sel);
 
   const shown = useMemo(() => {
     const words = norm(q).split(/\s+/).filter(Boolean);
     return items.filter((r) => {
       if (onlyStarred && !stars.has(r.id)) return false;
       if (course && r.course !== course) return false;
-      if (phase === "__untagged" ? r.phases.length > 0 : phase && !r.phases.includes(phase)) return false;
-      if (ftype === "__untagged" ? r.types.length > 0 : ftype && !r.types.includes(ftype)) return false;
-      return words.every((w) => r.search.includes(w));
+      if (sel.length) {
+        const mine = byRecipe.get(r.id);
+        if (sel.includes("__untagged")) { if (mine && mine.size) return false; }
+        else if (!selIds.every((id) => mine?.has(id))) return false;
+      }
+      return words.every((w) => r.search.includes(w) || tagText(r.id).includes(w));
     });
-  }, [items, q, course, phase, ftype, onlyStarred, stars]);
+  }, [items, q, course, sel, selIds, onlyStarred, stars, byRecipe, tagText]);
 
   const rank = new Map(order.map((id, i) => [id, i]));
   const topStarred = starredFirst && !onlyStarred
@@ -61,12 +81,12 @@ export default function Browser({ items, phases, types, typeLabels }: {
       <RecipeCard
         id={r.id} es={r.es} en={r.en} starred={stars.has(r.id)} flagged={r.flags > 0}
         meta={r.page + (r.phases.length ? ` · ${r.phases.join(", ")}` : "") + (r.types.length ? ` · ${r.types.map((t) => typeLabels[t] ?? t).join(", ")}` : "")}
+        footer={<RecipeTags recipeId={r.id} small onTagClick={toggleTag} activeTags={selSet} />}
       />
     </li>
   );
 
-  const untaggedPhase = items.filter((r) => !r.phases.length).length;
-  const untaggedType = items.filter((r) => !r.types.length).length;
+  const untagged = items.filter((r) => !byRecipe.get(r.id)?.size).length;
 
   return (
     <>
@@ -80,21 +100,32 @@ export default function Browser({ items, phases, types, typeLabels }: {
             {COURSES.map(([v, l]) => <option key={v} value={v}>{l}</option>)}
           </select>
         </label>
-        <label>Cycle phase
-          <select value={phase} onChange={(e) => setPhase(e.target.value)}>
-            <option value="">Any phase</option>
-            <option value="__untagged">Untagged ({untaggedPhase})</option>
-            {phases.map((p) => <option key={p} value={p}>{p}</option>)}
-          </select>
-        </label>
-        <label>Fertility type
-          <select value={ftype} onChange={(e) => setFtype(e.target.value)}>
-            <option value="">Any type</option>
-            <option value="__untagged">Untagged ({untaggedType})</option>
-            {types.map((t) => <option key={t} value={t}>{typeLabels[t] ?? t}</option>)}
-          </select>
-        </label>
       </div>
+      <div className="tagbar" aria-label="Filter by tag">
+        <div className="tagbar-head">
+          <span className="tagbar-title">Filter by tag</span>
+          <span className="hint">{sel.length > 1 && !sel.includes("__untagged") ? "Showing recipes with all selected tags." : "Tap tags to filter; tap a recipe’s “+ Tag” to tag it."}{tagStatus === "offline" ? " Tags offline: showing the last saved copy." : ""}</span>
+          <button type="button" className={`toggle${manage ? " on" : ""}`} aria-expanded={manage} onClick={() => setManage((v) => !v)}>Manage tags</button>
+        </div>
+        <div className="tagbar-chips">
+          {CATEGORY_ORDER.map((c) => {
+            const list = tags.filter((t) => t.category === c);
+            if (!list.length) return null;
+            return (
+              <span className="tagbar-group" key={c}>
+                <span className="tagbar-cat">{CATEGORY_LABEL[c]}</span>
+                {list.map((t) => <TagChip key={t.id} tag={t} small active={selSet.has(t.slug)} onClick={() => toggleTag(t.slug)} />)}
+              </span>
+            );
+          })}
+          <span className="tagbar-group">
+            <button type="button" className={`tchip sm ghostchip clickable${selSet.has("__untagged") ? " active" : ""}`} aria-pressed={selSet.has("__untagged")} onClick={() => toggleTag("__untagged")}>
+              Untagged ({untagged})
+            </button>
+          </span>
+        </div>
+      </div>
+      {manage && <TagManager onClose={() => setManage(false)} />}
       <div className="starbar">
         <button type="button" className={`toggle${onlyStarred ? " on" : ""}`} aria-pressed={onlyStarred} onClick={() => setOnlyStarred((v) => !v)}>
           <StarIcon filled={onlyStarred} size={16} /> Starred only <span className="badge">{stars.size}</span>
@@ -104,8 +135,8 @@ export default function Browser({ items, phases, types, typeLabels }: {
       </div>
       <div className="count">
         <span>{shown.length} of {items.length} recipes</span>
-        {(q || course || phase || ftype || onlyStarred) && (
-          <button className="reset" onClick={() => { setQ(""); setCourse(""); setPhase(""); setFtype(""); setOnlyStarred(false); }}>Clear filters</button>
+        {(q || course || sel.length > 0 || onlyStarred) && (
+          <button className="reset" onClick={() => { setQ(""); setCourse(""); setSel([]); setOnlyStarred(false); }}>Clear filters</button>
         )}
       </div>
       {topStarred.length > 0 && (

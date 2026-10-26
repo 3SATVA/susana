@@ -1,6 +1,6 @@
 import Header from "@/components/Header";
 import Browser, { type Item } from "@/components/Browser";
-import { data, recipes, TYPE_LABEL, pagesLabel } from "@/lib/data";
+import { recipes, TYPE_LABEL, pagesLabel } from "@/lib/data";
 
 export default function Home() {
   const items: Item[] = recipes.map((r) => ({
@@ -17,9 +17,9 @@ export default function Home() {
       <h1>Peruvian Recipes</h1>
       <p className="lead">
         {recipes.length} recipes transcribed and translated from a printed Nicolini cookbook (Peru). Private working collection:
-        cycle-phase and fertility-type tags are still empty, so everything shows as “untagged” for now.
+        tag recipes by cycle phase, fertility type or anything else (the Yoni Sync app will use these tags to plan meals).
       </p>
-      <Browser items={items} phases={data.vocab.cycle_phases} types={data.vocab.fertility_types} typeLabels={TYPE_LABEL} />
+      <Browser items={items} typeLabels={TYPE_LABEL} />
     </div>
   );
 }

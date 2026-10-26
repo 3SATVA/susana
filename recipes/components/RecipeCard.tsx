@@ -18,8 +18,8 @@ function swallowNextClick() {
   const t = setTimeout(cleanup, 1200);
 }
 
-export default function RecipeCard({ id, es, en, meta, starred, flagged }: {
-  id: string; es: string; en: string; meta: string; starred: boolean; flagged: boolean;
+export default function RecipeCard({ id, es, en, meta, starred, flagged, footer }: {
+  id: string; es: string; en: string; meta: string; starred: boolean; flagged: boolean; footer?: React.ReactNode;
 }) {
   const router = useRouter();
   const href = `/r/${id}`;
@@ -33,7 +33,7 @@ export default function RecipeCard({ id, es, en, meta, starred, flagged }: {
   const doToggle = () => { haptic(); void toggleStar(id); };
 
   return (
-    <div className={`cardwrap${starred ? " starred" : ""}`}>
+    <div className={`cardwrap${starred ? " starred" : ""}${footer ? " has-foot" : ""}`}>
       <Link
         className="card"
         href={href}
@@ -86,6 +86,7 @@ export default function RecipeCard({ id, es, en, meta, starred, flagged }: {
       >
         <StarIcon filled={starred} />
       </button>
+      {footer ? <div className="cardfoot">{footer}</div> : null}
     </div>
   );
 }

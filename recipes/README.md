@@ -17,6 +17,8 @@ Env (Vercel only, never commit): `RECIPES_PASSWORD`, and `RECIPES_DB_URL`, the S
 
 **Stars:** double-click a card on desktop, or press and hold it on a phone, to star it. The star button does the same. Stars are shared through `public.recipe_stars` in the Supabase project `susana`, which has RLS on and no anon policies; see `supabase/migrations/`. Only `/api/stars` reads or writes them, after it checks the password cookie. The browser keeps a localStorage cache and queues changes when the API is down. The source photos are gitignored and never published.
 
+**Tags:** Susana manages tags on the index page ("Manage tags": create with name, color and category Phase / Fertility type / Condition / Other; rename, recolor, delete) and tags recipes with the "+ Tag" picker on each card or recipe page. The tag bar filters the list (multiple tags = recipes with all of them; "Untagged" shows recipes with none). Tags live in `public.tags` (stable `slug`, `name`, `color`, `category`) and `public.recipe_tags` (`recipe_id` from `recipes_en.json`, `tag_id`) in the Supabase project `susana`, same server-only access as stars (RLS on, no anon policies, only `recipes_app` via `/api/tags` after the password check); see `supabase/migrations/20261025_recipe_tags.sql`. Seeded: Follicular, Luteal (Phase) and the six quiz fertility types (slugs match the ids in `quiz/lib/scoring-matrix.json`). The Yoni Sync app should read tags by `slug`, which never changes on rename.
+
 ```
 npm install && RECIPES_PASSWORD=dev npm run dev
 ```
