@@ -1,0 +1,812 @@
+[
+ {
+  "id": "mazamorra-de-chancaca",
+  "name": "Spiced Chancaca Pudding",
+  "local": "Mazamorra de Chancaca",
+  "phase": "menstrual",
+  "slot": "breakfast",
+  "course": "dessert",
+  "ingredients": [
+   "6 tablespoons all-purpose flour",
+   "1 large cake chancaca (raw cane sugar)",
+   "2 cups water",
+   "cinnamon, cloves, anise, orange peel",
+   "1 cup evaporated milk",
+   "sugar to taste",
+   "ground cinnamon"
+  ]
+ },
+ {
+  "id": "arroz-zambito",
+  "name": "Chancaca Rice Pudding with Coconut, Walnuts and Raisins",
+  "local": "Arroz Zambito",
+  "phase": "menstrual",
+  "slot": "breakfast",
+  "course": "dessert",
+  "ingredients": [
+   "1/2 cup rice",
+   "1 1/2 cups water",
+   "6 aniseeds",
+   "4 whole cloves",
+   "2 tablespoons grated coconut",
+   "2 tablespoons chopped walnuts",
+   "2 tablespoons raisins",
+   "1/2 lb (1/4 kilo) chancaca (raw cane sugar)",
+   "salt"
+  ]
+ },
+ {
+  "id": "humitas-dulces",
+  "name": "Sweet Fresh-Corn Humitas with Manjarblanco",
+  "local": "Humitas Dulces",
+  "phase": "menstrual",
+  "slot": "breakfast",
+  "course": "dessert",
+  "ingredients": [
+   "6 ears of choclo (Peruvian corn)",
+   "1 cup milk",
+   "2 tablespoons margarine",
+   "1/2 cup sugar",
+   "1 teaspoon cinnamon",
+   "1 small box raisins",
+   "manjarblanco (Peruvian dulce de leche)"
+  ]
+ },
+ {
+  "id": "crema-de-lentejas",
+  "name": "Cream of Lentil Soup",
+  "local": "Crema de Lentejas",
+  "phase": "menstrual",
+  "slot": "lunch",
+  "course": "soup",
+  "ingredients": [
+   "1 cup lentils",
+   "1 tablespoon margarine",
+   "1 onion",
+   "1/2 cup chopped bacon",
+   "1 teaspoon crushed garlic",
+   "1 tablespoon tomato sauce",
+   "1 tablespoon all-purpose flour",
+   "1 quart (1 liter) water",
+   "1 \"Doble Caldo\" chicken bouillon cube"
+  ]
+ },
+ {
+  "id": "sopa-de-frijoles",
+  "name": "Black Bean Soup",
+  "local": "Sopa de Frijoles",
+  "phase": "menstrual",
+  "slot": "lunch",
+  "course": "soup",
+  "ingredients": [
+   "1/2 lb (1/4 kilo) black beans, soaked overnight",
+   "2 tablespoons oil",
+   "1/4 cup chopped onion",
+   "1/4 teaspoon crushed garlic",
+   "8 cups water",
+   "2 \"Doble Caldo\" beef bouillon cubes",
+   "fried bread cubes, salt and pepper"
+  ]
+ },
+ {
+  "id": "aguadito-de-pollo",
+  "name": "Chicken and Cilantro Rice Soup",
+  "local": "Aguadito de Pollo",
+  "phase": "menstrual",
+  "slot": "lunch",
+  "course": "main",
+  "ingredients": [
+   "1 large, tender chicken, cut in pieces",
+   "1/2 cup oil",
+   "1 cup very finely chopped onion",
+   "1/2 cup chopped cilantro",
+   "2 tablespoons ground cilantro",
+   "1 teaspoon crushed garlic",
+   "ground ají to taste",
+   "salt, pepper",
+   "7 cups water"
+  ]
+ },
+ {
+  "id": "cazuela-de-pollo",
+  "name": "Chicken and Vegetable Soup",
+  "local": "Cazuela de Pollo",
+  "phase": "menstrual",
+  "slot": "lunch",
+  "course": "soup",
+  "ingredients": [
+   "3 quarts (3 liters) water",
+   "6 \"Doble Caldo\" chicken bouillon cubes",
+   "1/2 cup corn kernels",
+   "cabbage, green beans",
+   "carrots, fava beans",
+   "peas, celery",
+   "leek, winter squash",
+   "2 spinach leaves",
+   "3 potatoes, sliced"
+  ]
+ },
+ {
+  "id": "lentejas",
+  "name": "Lentils with Bacon",
+  "local": "Lentejas",
+  "phase": "menstrual",
+  "slot": "dinner",
+  "course": "main",
+  "ingredients": [
+   "1 lb (1/2 kilo) lentils",
+   "3 1/2 oz (100 g) bacon",
+   "1 onion, chopped",
+   "1/2 teaspoon crushed garlic",
+   "1 teaspoon or more ground green ají",
+   "1 sprig cilantro",
+   "1/4 teaspoon cumin",
+   "3/4 cup white potatoes, peeled and chopped"
+  ]
+ },
+ {
+  "id": "estofado-de-pollo",
+  "name": "Chicken Stew with Port and Raisins",
+  "local": "Estofado de Pollo",
+  "phase": "menstrual",
+  "slot": "dinner",
+  "course": "main",
+  "ingredients": [
+   "6 pieces of chicken",
+   "1/2 cup oil",
+   "1 1/2 cups chopped onion",
+   "1 small can tomato sauce",
+   "1/4 teaspoon crushed garlic",
+   "salt and pepper",
+   "1 small box raisins",
+   "6 olives",
+   "3/4 cup port or sweet wine"
+  ]
+ },
+ {
+  "id": "garbanzos-con-acelgas",
+  "name": "Chickpeas with Swiss Chard",
+  "local": "Garbanzos con Acelgas",
+  "phase": "menstrual",
+  "slot": "dinner",
+  "course": "main",
+  "ingredients": [
+   "1 lb (1/2 kilo) chickpeas, soaked overnight",
+   "1/2 lb (1/4 kilo) pork jowl",
+   "4 tablespoons oil",
+   "1 medium onion, chopped",
+   "1 small tomato",
+   "1 heaping tablespoon tomato paste",
+   "1 teaspoon crushed garlic",
+   "salt",
+   "pepper"
+  ]
+ },
+ {
+  "id": "locro-de-zapallo",
+  "name": "Peruvian Squash Stew",
+  "local": "Locro de Zapallo",
+  "phase": "menstrual",
+  "slot": "dinner",
+  "course": "main",
+  "ingredients": [
+   "1/3 cup oil",
+   "1 small onion, chopped",
+   "3 cloves garlic, crushed",
+   "ground ají to taste",
+   "salt and pepper",
+   "3 1/3 lb (1 1/2 kilos) zapallo (Peruvian winter squash)",
+   "3 white potatoes, quartered",
+   "1/2 lb (1/4 kilo) peas",
+   "2 ears of corn, sliced in rounds"
+  ]
+ },
+ {
+  "id": "tortilla-de-pescado",
+  "name": "Fish and Potato Omelet",
+  "local": "Tortilla de Pescado",
+  "phase": "follicular",
+  "slot": "breakfast",
+  "course": "starter",
+  "ingredients": [
+   "1 cup flaked fish",
+   "2 cups diced fried potatoes",
+   "6 eggs",
+   "1 onion, chopped",
+   "6 tablespoons milk",
+   "salt and pepper",
+   "3 tablespoons Parmesan cheese",
+   "oil",
+   "1 tablespoon chopped parsley and cilantro"
+  ]
+ },
+ {
+  "id": "flan-de-verduras",
+  "name": "Vegetable Custard",
+  "local": "Flan de Verduras",
+  "phase": "follicular",
+  "slot": "breakfast",
+  "course": "starter",
+  "ingredients": [
+   "5 eggs",
+   "1 large can evaporated milk",
+   "1/2 cup cooked peas",
+   "1/2 cup cooked green beans",
+   "1/2 cup cooked carrots",
+   "1/2 cup cooked cauliflower",
+   "1/2 cup cooked artichokes",
+   "3/4 cup Parmesan cheese",
+   "1/4 cup melted margarine"
+  ]
+ },
+ {
+  "id": "pancitos-de-manzana",
+  "name": "Little Apple Muffins",
+  "local": "Pancitos de Manzana",
+  "phase": "follicular",
+  "slot": "breakfast",
+  "course": "dessert",
+  "ingredients": [
+   "7 oz (200 g) all-purpose flour",
+   "3 teaspoons baking powder",
+   "a pinch of salt",
+   "2 tablespoons powdered sugar",
+   "1 egg",
+   "1/2 cup milk",
+   "2 tablespoons oil",
+   "1 cup diced apple"
+  ]
+ },
+ {
+  "id": "cebiche-de-atun",
+  "name": "Tuna Ceviche",
+  "local": "Cebiche de Atún",
+  "phase": "follicular",
+  "slot": "lunch",
+  "course": "starter",
+  "ingredients": [
+   "2 cans tuna",
+   "1 large onion, thinly sliced lengthwise",
+   "1 clove garlic, crushed",
+   "pepper, and salt if needed",
+   "lime juice or sour orange juice",
+   "ground ají to taste",
+   "chopped green ají pepper",
+   "1/2 tablespoon chopped cilantro",
+   "boiled sweet potatoes, sliced"
+  ]
+ },
+ {
+  "id": "crema-de-espinacas",
+  "name": "Cream of Spinach Soup",
+  "local": "Crema de Espinacas",
+  "phase": "follicular",
+  "slot": "lunch",
+  "course": "soup",
+  "ingredients": [
+   "4 bunches spinach",
+   "2 tablespoons margarine",
+   "2 tablespoons all-purpose flour",
+   "3 cups water",
+   "1 \"Doble Caldo\" chicken bouillon cube",
+   "2 cups milk",
+   "salt and pepper to taste",
+   "3 tablespoons Parmesan cheese",
+   "fried bread cubes"
+  ]
+ },
+ {
+  "id": "timbal-de-espinacas",
+  "name": "Spinach Timbale",
+  "local": "Timbal de Espinacas",
+  "phase": "follicular",
+  "slot": "lunch",
+  "course": "starter",
+  "ingredients": [
+   "6 bunches spinach",
+   "5 eggs",
+   "1 cup Parmesan cheese",
+   "1 cup milk, for soaking:",
+   "10 slices sandwich bread, crusts removed",
+   "salt, pepper, nutmeg",
+   "2 tablespoons margarine",
+   "2 tablespoons all-purpose flour",
+   "2 cups milk"
+  ]
+ },
+ {
+  "id": "menestron",
+  "name": "Peruvian Minestrone with Basil Pesto",
+  "local": "Menestrón",
+  "phase": "follicular",
+  "slot": "lunch",
+  "course": "soup",
+  "ingredients": [
+   "8 cups water",
+   "4 \"Doble Caldo\" beef bouillon cubes",
+   "1 carrot",
+   "1 turnip",
+   "2 ears of corn, in rounds",
+   "1 cup chopped cabbage",
+   "1/3 cup peas",
+   "1/2 cup fava beans",
+   "1/3 cup fresh green beans (shelling beans)"
+  ]
+ },
+ {
+  "id": "pescado-a-la-chorrillana",
+  "name": "Fish Chorrillos-Style with Onion and Tomato",
+  "local": "Pescado a la Chorrillana",
+  "phase": "follicular",
+  "slot": "dinner",
+  "course": "main",
+  "ingredients": [
+   "2 1/4 lb (1 kilo) fish fillets",
+   "salt and pepper",
+   "all-purpose flour",
+   "1/2 cup oil",
+   "2 large onions, cut in thick strips",
+   "3 tomatoes, peeled and cut in thick wedges",
+   "1 green ají pepper, cut in strips",
+   "1 teaspoon crushed garlic",
+   "salt and pepper"
+  ]
+ },
+ {
+  "id": "tallarines-con-esparragos",
+  "name": "Spaghetti with Asparagus Cream Sauce",
+  "local": "Tallarines con Espárragos",
+  "phase": "follicular",
+  "slot": "dinner",
+  "course": "main",
+  "ingredients": [
+   "1 lb (1/2 kilo) long spaghetti (\"tallarín largo\") No. 40 (cooked)",
+   "3 tablespoons margarine",
+   "2 tablespoons all-purpose flour",
+   "1 large can asparagus",
+   "1 1/2 cups undiluted evaporated milk",
+   "1/2 cup Parmesan cheese",
+   "salt and pepper"
+  ]
+ },
+ {
+  "id": "fideos-con-salsa-de-albahaca",
+  "name": "Pasta with Basil-Spinach Pesto",
+  "local": "Fideos con Salsa de Albahaca",
+  "phase": "follicular",
+  "slot": "dinner",
+  "course": "main",
+  "ingredients": [
+   "1 lb (1/2 kilo) plain elbows (\"codo llano\"), cooked",
+   "1/2 cup margarine",
+   "1/4 cup oil",
+   "1 bunch basil",
+   "2 bunches spinach",
+   "2 cloves garlic, crushed",
+   "5 oz (150 g) Parmesan cheese",
+   "3 1/2 oz (100 g) shelled walnuts, ground",
+   "salt"
+  ]
+ },
+ {
+  "id": "arroz-con-pescado",
+  "name": "Rice with Fish",
+  "local": "Arroz con Pescado",
+  "phase": "follicular",
+  "slot": "dinner",
+  "course": "main",
+  "ingredients": [
+   "1/3 cup margarine",
+   "2 1/4 lb (1 kilo) white fish",
+   "1 onion, chopped",
+   "2 tomatoes",
+   "4 cloves garlic",
+   "1/2 cup white wine",
+   "3 1/2 cups fish broth",
+   "1/3 cup mushrooms",
+   "3/4 cup peas"
+  ]
+ },
+ {
+  "id": "flan-de-alcachofas",
+  "name": "Artichoke Custard",
+  "local": "Flan de Alcachofas",
+  "phase": "ovulation",
+  "slot": "breakfast",
+  "course": "starter",
+  "ingredients": [
+   "1/4 cup margarine",
+   "6 large artichokes, boiled",
+   "6 eggs",
+   "1 large can evaporated milk",
+   "1/2 cup Parmesan cheese",
+   "pepper",
+   "salt",
+   "2 tablespoons margarine",
+   "2 tablespoons all-purpose flour"
+  ]
+ },
+ {
+  "id": "pudin-de-semola",
+  "name": "Strawberry Semolina Pudding",
+  "local": "Pudín de Sémola",
+  "phase": "ovulation",
+  "slot": "breakfast",
+  "course": "dessert",
+  "ingredients": [
+   "2 3/4 oz (80 g) semolina",
+   "1 can sweetened condensed milk",
+   "1 lb (1/2 kilo) strawberries",
+   "4 eggs",
+   "2 cups (1/2 liter) water"
+  ]
+ },
+ {
+  "id": "zanahorias-rellenas",
+  "name": "Stuffed Carrots",
+  "local": "Zanahorias Rellenas",
+  "phase": "ovulation",
+  "slot": "breakfast",
+  "course": "starter",
+  "ingredients": [
+   "6 large carrots",
+   "1/2 onion, chopped",
+   "1/2 lb (1/4 kilo) ground pork",
+   "2 tablespoons mushrooms, soaked and chopped",
+   "1/2 cup bread crumbs soaked in water",
+   "1 egg",
+   "3 1/2 oz (100 g) chopped ham",
+   "2 tablespoons oil",
+   "salt and pepper"
+  ]
+ },
+ {
+  "id": "anticuchos-de-pescado",
+  "name": "Fish Skewers",
+  "local": "Anticuchos de Pescado",
+  "phase": "ovulation",
+  "slot": "lunch",
+  "course": "starter",
+  "ingredients": [
+   "1 medium toyo (small shark/dogfish)",
+   "1/2 cup vinegar",
+   "2 tablespoons ground red ají (ají panca)",
+   "garlic, cumin, salt and pepper",
+   "oil"
+  ]
+ },
+ {
+  "id": "crema-de-tomate",
+  "name": "Cream of Tomato Soup",
+  "local": "Crema de Tomate",
+  "phase": "ovulation",
+  "slot": "lunch",
+  "course": "soup",
+  "ingredients": [
+   "2 tablespoons margarine",
+   "3 tablespoons all-purpose flour",
+   "salt and pepper",
+   "2 cups milk",
+   "a pinch of baking soda",
+   "3 cups fresh, ripe tomatoes",
+   "1/2 onion, chopped",
+   "1 stalk celery",
+   "1/2 teaspoon sugar"
+  ]
+ },
+ {
+  "id": "pastel-de-acelgas",
+  "name": "Swiss Chard Bake",
+  "local": "Pastel de Acelgas",
+  "phase": "ovulation",
+  "slot": "lunch",
+  "course": "starter",
+  "ingredients": [
+   "2 bunches Swiss chard, cooked",
+   "5 bunches spinach, cooked",
+   "1/2 loaf sandwich bread, crusts removed",
+   "1 large can evaporated milk",
+   "3 tablespoons margarine",
+   "1 small brain (beef or lamb), boiled",
+   "8 eggs",
+   "1 cup grated Parmesan cheese",
+   "1 small can pâté"
+  ]
+ },
+ {
+  "id": "zapallitos-rellenos",
+  "name": "Stuffed Zucchini with Ham",
+  "local": "Zapallitos Rellenos",
+  "phase": "ovulation",
+  "slot": "lunch",
+  "course": "starter",
+  "ingredients": [
+   "[?] tablespoons margarine",
+   "[?] tablespoons very finely chopped onion",
+   "[?] tablespoons all-purpose flour",
+   "[?] cup milk",
+   "[?] tablespoons chopped ham",
+   "[?] egg yolks",
+   "[1] tablespoon chopped parsley",
+   "salt and pepper",
+   "[?] zucchini"
+  ]
+ },
+ {
+  "id": "fideos-con-camarones",
+  "name": "Pasta with Shrimp in Tomato-Wine Sauce",
+  "local": "Fideos con Camarones",
+  "phase": "ovulation",
+  "slot": "dinner",
+  "course": "main",
+  "ingredients": [
+   "1 lb (1/2 kilo) long pasta No. 39, cooked",
+   "2 1/4 lb (1 kilo) freshwater shrimp (camarones)",
+   "1/2 cup margarine",
+   "1 onion, chopped",
+   "3 cloves garlic, crushed",
+   "1 large bell pepper, ground",
+   "1 cup peeled, chopped tomatoes",
+   "1/2 cup ketchup",
+   "1/2 cup dry white wine"
+  ]
+ },
+ {
+  "id": "arroz-con-choros-atamalado",
+  "name": "Creamy Rice with Mussels (Atamalado)",
+  "local": "Arroz con Choros (Atamalado)",
+  "phase": "ovulation",
+  "slot": "dinner",
+  "course": "main",
+  "ingredients": [
+   "4 tablespoons lard",
+   "1 onion, chopped",
+   "1/2 tablespoon crushed garlic",
+   "salt, pepper, cumin",
+   "ground ají to taste",
+   "1 cup cilantro leaves (blended)",
+   "1 ear of corn, kernels cut off",
+   "3/4 cup boiled peas",
+   "4 dozen mussels"
+  ]
+ },
+ {
+  "id": "coliflor-saltada",
+  "name": "Sautéed Cauliflower with Egg",
+  "local": "Coliflor Saltada",
+  "phase": "ovulation",
+  "slot": "dinner",
+  "course": "main",
+  "ingredients": [
+   "1 young cauliflower",
+   "3 tablespoons margarine",
+   "salt and pepper",
+   "1/2 cup very finely chopped onion",
+   "1/2 teaspoon crushed garlic",
+   "ground ají to taste",
+   "4 eggs",
+   "1/2 cup Parmesan cheese",
+   "chopped parsley"
+  ]
+ },
+ {
+  "id": "adobo-de-pescado",
+  "name": "Fish in Vinegar–Ají Marinade",
+  "local": "Adobo de Pescado",
+  "phase": "ovulation",
+  "slot": "dinner",
+  "course": "main",
+  "ingredients": [
+   "1 medium toyo (small shark/dogfish)",
+   "salt and pepper",
+   "1 level teaspoon cumin",
+   "1 teaspoon crushed garlic",
+   "1/4 teaspoon oregano",
+   "1/2 cup vinegar",
+   "1/4 cup oil",
+   "1 tablespoon ground red ají",
+   "2 onions, sliced"
+  ]
+ },
+ {
+  "id": "quinua-atamalada",
+  "name": "Creamy Quinoa with Dried Shrimp and Cheese",
+  "local": "Quinua Atamalada",
+  "phase": "luteal",
+  "slot": "breakfast",
+  "course": "main",
+  "ingredients": [
+   "1 lb (1/2 kilo) quinoa",
+   "1/2 cup oil",
+   "1 medium onion, chopped",
+   "1 heaping tablespoon special ground red ají (ají panca)",
+   "1/2 tablespoon crushed garlic",
+   "1/4 cup small dried shrimp (camaroncitos chinos)",
+   "salt, pepper, oregano, chopped parsley",
+   "6 yellow potatoes, boiled",
+   "1/2 cup crumbled queso fresco"
+  ]
+ },
+ {
+  "id": "pastelitos-de-semola",
+  "name": "Little Baked Semolina-Almond Cakes",
+  "local": "Pastelitos de Sémola",
+  "phase": "luteal",
+  "slot": "breakfast",
+  "course": "dessert",
+  "ingredients": [
+   "1 quart (1 liter) milk",
+   "5 oz (150 g) semolina",
+   "8 tablespoons sugar",
+   "1 oz (25 g) almonds",
+   "2 eggs, 1 tablespoon butter",
+   "lime peel"
+  ]
+ },
+ {
+  "id": "sopa-de-semola",
+  "name": "Semolina Soup",
+  "local": "Sopa de Sémola",
+  "phase": "luteal",
+  "slot": "breakfast",
+  "course": "soup",
+  "ingredients": [
+   "6 cups water, salt if needed",
+   "3 \"Doble Caldo\" chicken bouillon cubes",
+   "6 tablespoons semolina",
+   "3 tablespoons Parmesan cheese"
+  ]
+ },
+ {
+  "id": "crema-de-zapallo",
+  "name": "Cream of Squash Soup",
+  "local": "Crema de Zapallo",
+  "phase": "luteal",
+  "slot": "lunch",
+  "course": "soup",
+  "ingredients": [
+   "2 1/4 lb (1 kilo) zapallo macre (Peruvian winter squash)",
+   "3 tablespoons margarine",
+   "1 large onion, chopped",
+   "1/4 teaspoon crushed garlic",
+   "salt and pepper",
+   "6 cups water",
+   "2 \"Doble Caldo\" beef bouillon cubes",
+   "3 tablespoons grated Parmesan cheese",
+   "1 small can evaporated milk"
+  ]
+ },
+ {
+  "id": "sopa-de-ollucos",
+  "name": "Olluco Soup with Fava Beans and Cheese",
+  "local": "Sopa de Ollucos",
+  "phase": "luteal",
+  "slot": "lunch",
+  "course": "soup",
+  "ingredients": [
+   "1/3 cup oil",
+   "1 onion, very finely chopped",
+   "1 tablespoon ground fresh ají",
+   "1/2 teaspoon oregano",
+   "3 cloves garlic, crushed",
+   "1 sprig mint (hierbabuena)",
+   "1 lb (1/2 kilo) ollucos, well washed and chopped",
+   "1 tablespoon chopped parsley",
+   "1 tablespoon chopped cilantro"
+  ]
+ },
+ {
+  "id": "papas-con-mani",
+  "name": "Potatoes in Peanut Sauce",
+  "local": "Papas con Maní",
+  "phase": "luteal",
+  "slot": "lunch",
+  "course": "main",
+  "ingredients": [
+   "1/4 cup oil",
+   "1 onion, finely chopped",
+   "1 clove garlic, crushed",
+   "ground ají to taste",
+   "salt and pepper",
+   "1/2 lb (1/4 kilo) peanuts, toasted and ground",
+   "1 cup water",
+   "1 \"Doble Caldo\" chicken bouillon cube",
+   "1 cup evaporated milk"
+  ]
+ },
+ {
+  "id": "chupe-de-pescado",
+  "name": "Peruvian Fish Chowder",
+  "local": "Chupe de Pescado",
+  "phase": "luteal",
+  "slot": "lunch",
+  "course": "soup",
+  "ingredients": [
+   "2 tablespoons oil",
+   "6 pieces white fish, floured and fried",
+   "1/2 can peas",
+   "1/2 cup corn kernels",
+   "4 tablespoons rice",
+   "2 tablespoons small dried shrimp (camaroncitos chinos)",
+   "1 onion, chopped",
+   "1 clove garlic",
+   "3 eggs"
+  ]
+ },
+ {
+  "id": "cau-cau-de-pollo",
+  "name": "Chicken and Potato Stew with Mint",
+  "local": "Cau-Cau de Pollo",
+  "phase": "luteal",
+  "slot": "dinner",
+  "course": "main",
+  "ingredients": [
+   "1/3 cup oil",
+   "1 onion, chopped",
+   "palillo (Peruvian turmeric)",
+   "1/2 tablespoon crushed garlic",
+   "3 cups boiled chicken, diced",
+   "1 1/2 cups diced potatoes",
+   "1 tablespoon mint (hierbabuena)",
+   "ají amarillo to taste",
+   "lime juice"
+  ]
+ },
+ {
+  "id": "pepian-de-choclo",
+  "name": "Pork with Creamy Grated Fresh Corn",
+  "local": "Pepián de Choclo",
+  "phase": "luteal",
+  "slot": "dinner",
+  "course": "main",
+  "ingredients": [
+   "1/3 cup oil",
+   "1 lb (1/2 kilo) pork, in pieces",
+   "1 1/2 cups chopped onion",
+   "1 teaspoon crushed garlic",
+   "ground ají to taste",
+   "6 large ears of choclo (Peruvian corn)",
+   "salt",
+   "pepper",
+   "broth made with 1 \"Doble Caldo\" beef bouillon cube and 1 cup boiling water"
+  ]
+ },
+ {
+  "id": "ajiaco-de-caiguas",
+  "name": "Caigua and Potato Stew with Cheese",
+  "local": "Ajiaco de Caiguas",
+  "phase": "luteal",
+  "slot": "dinner",
+  "course": "main",
+  "ingredients": [
+   "5 caiguas (stuffing cucumbers), cooked and cut in strips",
+   "1/3 cup oil",
+   "1 onion, chopped",
+   "garlic, pepper, salt and cumin",
+   "1 lb (1/2 kilo) potatoes, boiled and crumbled",
+   "1/2 cup water",
+   "1 \"Doble Caldo\" beef bouillon cube",
+   "1/2 cup milk",
+   "5 oz (150 g) crumbled queso fresco"
+  ]
+ },
+ {
+  "id": "salsa-de-hongos",
+  "name": "Fresh Spinach Noodles with Mushroom Sauce",
+  "local": "Salsa de Hongos",
+  "phase": "luteal",
+  "slot": "dinner",
+  "course": "main",
+  "ingredients": [
+   "1 lb (1/2 kilo) pasta",
+   "2 cups all-purpose flour",
+   "2 eggs",
+   "3 bunches spinach",
+   "a little milk",
+   "a pinch of nutmeg",
+   "1 package dried mushrooms (1/2 oz / 15 g)",
+   "1 small onion",
+   "2 cloves garlic"
+  ]
+ }
+]
