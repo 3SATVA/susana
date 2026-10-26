@@ -41,9 +41,9 @@ export default function MoonRing({ day }: { day: number }) {
     <svg viewBox={`0 0 ${S} ${S}`} className="moonring" role="img" aria-label={`Cycle day ${day}, ${PHASES[phase].label} phase`}>
       <defs>
         <radialGradient id="glow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#fff" />
-          <stop offset="70%" stopColor="#FFF6F2" />
-          <stop offset="100%" stopColor="#F7E6EA" />
+          <stop offset="0%" stopColor="#fff" stopOpacity=".55" />
+          <stop offset="70%" stopColor="#FFF6F2" stopOpacity=".5" />
+          <stop offset="100%" stopColor="#F7E6EA" stopOpacity=".7" />
         </radialGradient>
         <filter id="soft" x="-50%" y="-50%" width="200%" height="200%">
           <feDropShadow dx="0" dy="2" stdDeviation="3" floodColor="#684259" floodOpacity=".25" />

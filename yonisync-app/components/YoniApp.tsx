@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import MoonRing from "./MoonRing";
 import {
   IconBowl, IconCalendar, IconCall, IconCheck, IconChevron, IconClose, IconDrop, IconHeart, IconLock,
@@ -77,11 +77,11 @@ export default function YoniApp() {
       <div className="phone">
         <div className="screen">
           {!ready ? (
-            <div className="splash"><img src="/yonisync-wordmark.png" alt="YoniSync" /></div>
+            <div className="splash"><Logo big /></div>
           ) : (
             <>
               <header className="topbar">
-                <img src="/yonisync-wordmark.png" alt="YoniSync" className="wordmark" />
+                <Logo />
                 <span className="demo-pill">Demo</span>
               </header>
               <main className="scroll" key={tab}>
@@ -120,6 +120,15 @@ export default function YoniApp() {
   );
 }
 
+function Logo({ big = false }: { big?: boolean }) {
+  return (
+    <span className={`logo ${big ? "big" : ""}`} aria-label="yoni sync">
+      {big && <img src="/yonisync-mark.png" alt="" className="logo-mark" />}
+      <span className="logo-name">yoni sync</span>
+    </span>
+  );
+}
+
 /* ---------------- Profile ---------------- */
 
 function Profile({ today, periodStart, onLog, onReset, go }: {
@@ -145,7 +154,10 @@ function Profile({ today, periodStart, onLog, onReset, go }: {
       </div>
 
       <section className="card moon-card" style={{ background: `linear-gradient(180deg, ${P.soft} 0%, #fff 70%)` }}>
-        <MoonRing day={day} />
+        <div className="ring-wrap">
+          <img src="/yonisync-mark.png" alt="" className="ring-watermark" aria-hidden />
+          <MoonRing day={day} />
+        </div>
         <p className="focus">{P.focus}</p>
         <div className="legend">
           {PHASE_ORDER.map((id) => (
@@ -195,84 +207,169 @@ const SLOT_SHORT = { breakfast: "Morning", lunch: "Lunch", dinner: "Dinner" } as
 
 function Calendar({ today, periodStart, onOpen }: { today: Date; periodStart: Date; onOpen: (m: Meal, d: Date, s: Slot) => void }) {
   const [offset, setOffset] = useState(0);
-  const [sel, setSel] = useState<Date>(today);
+  const [drag, setDrag] = useState(0);
+  const [anim, setAnim] = useState(false);
+  const viewRef = useRef<HTMLDivElement>(null);
+  const g = useRef<{ x: number; y: number; id: number; mode: "?" | "h" | "v"; moved: boolean } | null>(null);
+  const suppressUntil = useRef(0);
   const weekStart = addDays(today, -today.getDay() + offset * 7);
   const days = Array.from({ length: 7 }, (_, i) => addDays(weekStart, i));
-  const selDay = cycleDay(sel, periodStart);
-  const selPhase = PHASES[phaseFor(selDay)];
   const range = `${fmt(days[0], { month: "short", day: "numeric" })} – ${fmt(days[6], { month: days[0].getMonth() === days[6].getMonth() ? undefined : "short", day: "numeric" })}`;
+  const paneW = () => viewRef.current?.offsetWidth || 354;
 
-  const shift = (n: number) => {
-    setOffset((o) => o + n);
-    setSel(addDays(weekStart, n * 7 + (offset + n === 0 ? today.getDay() : 0)));
+  const go = (dir: number) => { if (anim) return; setAnim(true); setDrag(-dir * paneW()); };
+  const onEnd = (e: React.TransitionEvent) => {
+    if (e.target !== e.currentTarget || e.propertyName !== "transform") return;
+    if (drag !== 0) setOffset((o) => o + (drag < 0 ? 1 : -1));
+    setAnim(false); setDrag(0);
   };
+
+  const down = (e: React.PointerEvent) => {
+    if (anim || (e.pointerType === "mouse" && e.button !== 0)) return;
+    g.current = { x: e.clientX, y: e.clientY, id: e.pointerId, mode: "?", moved: false };
+  };
+  const move = (e: React.PointerEvent) => {
+    const s = g.current; if (!s || s.id !== e.pointerId) return;
+    const dx = e.clientX - s.x, dy = e.clientY - s.y;
+    if (s.mode === "?") {
+      if (Math.abs(dx) < 8 && Math.abs(dy) < 8) return;
+      s.mode = Math.abs(dx) > Math.abs(dy) ? "h" : "v";
+      if (s.mode === "h") (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+    }
+    if (s.mode === "h") { s.moved = true; setDrag(dx); }
+  };
+  const up = (e: React.PointerEvent) => {
+    const s = g.current; g.current = null; if (!s || s.mode !== "h") return;
+    if (s.moved) suppressUntil.current = Date.now() + 350;
+    const dx = e.clientX - s.x, w = paneW();
+    setAnim(true);
+    if (Math.abs(dx) > w * 0.18) setDrag(dx < 0 ? -w : w); else setDrag(0);
+    if (dx === 0) setAnim(false);
+  };
+  const clickCap = (e: React.MouseEvent) => { if (Date.now() < suppressUntil.current) { e.stopPropagation(); e.preventDefault(); } };
+
+  const pct = drag / paneW(); // -1..1, fraction of a week
+  const label = offset === 0 ? "This week" : offset === 1 ? "Next week" : offset === -1 ? "Last week" : fmt(days[0], { month: "long", year: "numeric" });
 
   return (
     <div className="page cal">
       <div className="cal-head">
-        <button className="round" onClick={() => shift(-1)} aria-label="Previous week"><IconChevron dir="left" width={18} height={18} /></button>
+        <button className="round" onClick={() => go(-1)} aria-label="Previous week"><IconChevron dir="left" width={18} height={18} /></button>
         <div className="cal-title">
-          <p className="eyebrow">{offset === 0 ? "This week" : offset === 1 ? "Next week" : offset === -1 ? "Last week" : fmt(days[0], { month: "long", year: "numeric" })}</p>
+          <p className="eyebrow">{label}</p>
           <h1 className="display sm">{range}</h1>
         </div>
-        <button className="round" onClick={() => shift(1)} aria-label="Next week"><IconChevron width={18} height={18} /></button>
+        <button className="round" onClick={() => go(1)} aria-label="Next week"><IconChevron width={18} height={18} /></button>
       </div>
 
-      <div className="week">
-        {days.map((d) => {
-          const cd = cycleDay(d, periodStart);
-          const ph = PHASES[phaseFor(cd)];
-          const isToday = dayDiff(d, today) === 0;
-          const isSel = dayDiff(d, sel) === 0;
-          return (
-            <div key={isoDay(d)} className={`col ${isSel ? "sel" : ""}`} style={{ ["--ph" as string]: ph.color, ["--phs" as string]: ph.soft, ["--phi" as string]: ph.ink }}>
-              <button className={`col-head ${isToday ? "today" : ""}`} onClick={() => setSel(d)} aria-label={fmt(d, { weekday: "long", month: "long", day: "numeric" })}>
-                <span className="wd">{fmt(d, { weekday: "narrow" })}</span>
-                <span className="dn">{d.getDate()}</span>
-                <span className="ph-bar" title={ph.label} />
-                <span className="cd">D{cd}</span>
-              </button>
-              {SLOTS.map((s) => {
-                const m = mealFor(d, periodStart, s.id);
-                const Icon = SLOT_ICON[s.id];
-                return (
-                  <button key={s.id} className="meal-btn" onClick={() => { setSel(d); onOpen(m, d, s.id); }} aria-label={`${s.label}: ${m.name}`}>
-                    <Icon width={17} height={17} />
-                    <span>{SLOT_SHORT[s.id]}</span>
-                  </button>
-                );
-              })}
-            </div>
-          );
-        })}
-      </div>
-
-      <div className="phase-key">
-        {PHASE_ORDER.map((id) => <span key={id}><i style={{ background: PHASES[id].color }} />{PHASES[id].label}</span>)}
-      </div>
-
-      <section className="card day-card" style={{ borderTop: `4px solid ${selPhase.color}` }}>
-        <div className="h2row">
-          <h2 className="h2">{fmt(sel, { weekday: "long", month: "short", day: "numeric" })}</h2>
-          <span className="chip" style={{ background: selPhase.soft, color: selPhase.ink }}>Day {selDay} · {selPhase.label}</span>
+      <div className="swipe-zone" onPointerDown={down} onPointerMove={move} onPointerUp={up} onPointerCancel={up} onClickCapture={clickCap}>
+        <CycleWave today={today} periodStart={periodStart} weekStart={weekStart} shift={pct} anim={anim} />
+        <div className="week-view" ref={viewRef}>
+          <div
+            className={`week-track ${anim ? "anim" : ""}`}
+            style={{ transform: `translate3d(calc(-100% + ${drag}px), 0, 0)` }}
+            onTransitionEnd={onEnd}
+          >
+            {[-1, 0, 1].map((k) => (
+              <WeekGrid key={offset + k} start={addDays(weekStart, k * 7)} today={today} periodStart={periodStart} onOpen={onOpen} />
+            ))}
+          </div>
         </div>
-        <p className="why">{selPhase.why}</p>
-        <ul className="day-meals">
-          {SLOTS.map((s) => {
-            const m = mealFor(sel, periodStart, s.id);
-            const Icon = SLOT_ICON[s.id];
-            return (
-              <li key={s.id}>
-                <button onClick={() => onOpen(m, sel, s.id)}>
-                  <span className="dm-ico" style={{ background: selPhase.soft, color: selPhase.ink }}><Icon width={18} height={18} /></span>
-                  <span className="dm-txt"><small>{s.label}</small><b>{m.name}</b></span>
-                  <IconChevron width={16} height={16} />
+        <p className="swipe-hint">Swipe to change week</p>
+      </div>
+    </div>
+  );
+}
+
+function WeekGrid({ start, today, periodStart, onOpen }: { start: Date; today: Date; periodStart: Date; onOpen: (m: Meal, d: Date, s: Slot) => void }) {
+  return (
+    <div className="week">
+      {Array.from({ length: 7 }, (_, i) => addDays(start, i)).map((d) => {
+        const cd = cycleDay(d, periodStart);
+        const ph = PHASES[phaseFor(cd)];
+        const isToday = dayDiff(d, today) === 0;
+        return (
+          <div key={isoDay(d)} className={`col ${isToday ? "sel" : ""}`} style={{ ["--ph" as string]: ph.color, ["--phs" as string]: ph.soft, ["--phi" as string]: ph.ink }}>
+            <div className={`col-head ${isToday ? "today" : ""}`} aria-label={fmt(d, { weekday: "long", month: "long", day: "numeric" })}>
+              <span className="wd">{fmt(d, { weekday: "narrow" })}</span>
+              <span className="dn">{d.getDate()}</span>
+              <span className="ph-bar" title={ph.label} />
+              <span className="cd">D{cd}</span>
+            </div>
+            {SLOTS.map((s) => {
+              const m = mealFor(d, periodStart, s.id);
+              const Icon = SLOT_ICON[s.id];
+              return (
+                <button key={s.id} className="meal-btn" onClick={() => onOpen(m, d, s.id)} aria-label={`${s.label}: ${m.name}`}>
+                  <Icon width={18} height={18} />
+                  <span>{SLOT_SHORT[s.id]}</span>
                 </button>
-              </li>
-            );
-          })}
-        </ul>
-      </section>
+              );
+            })}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+/** Sine wave of the cycle (low at period, peak at ovulation), ~4 weeks wide, the visible week centered and highlighted. */
+function CycleWave({ today, periodStart, weekStart, shift, anim }: { today: Date; periodStart: Date; weekStart: Date; shift: number; anim: boolean }) {
+  const W = 354, H = 104, dayW = W / 28, mid = 48, A = 30;
+  const x0 = 10.5 * dayW; // left edge of the visible week
+  const segs: { d: string; area: string; color: string; soft: string }[] = [];
+  const labels: { x: number; text: string; color: string }[] = [];
+  const ticks: { x: number; text: string }[] = [];
+  let todayPt: { x: number; y: number } | null = null;
+  // u = continuous cycle position (0 = start of day 1). y high (small) at ovulation.
+  const Y = (u: number) => mid + A * Math.cos((2 * Math.PI * u) / CYCLE_LENGTH);
+  let run: { start: number; phase: PhaseId } | null = null;
+  const flush = (end: number) => {
+    if (!run) return;
+    const P = PHASES[run.phase];
+    const cx = x0 + ((run.start + end) / 2) * dayW;
+    if (end - run.start >= 3) labels.push({ x: cx, text: P.label, color: P.ink });
+  };
+  for (let i = -19; i <= 26; i++) {
+    const d = addDays(weekStart, i);
+    const cd = cycleDay(d, periodStart);
+    const phase = phaseFor(cd);
+    const P = PHASES[phase];
+    if (!run || run.phase !== phase) { flush(i); run = { start: i, phase }; }
+    const pts: string[] = [];
+    for (let k = 0; k <= 6; k++) {
+      const t = k / 6;
+      pts.push(`${(x0 + (i + t) * dayW).toFixed(1)},${Y(cd - 1 + t).toFixed(1)}`);
+    }
+    segs.push({ d: `M${pts.join("L")}`, area: `M${pts[0].split(",")[0]},${H - 14}L${pts.join("L")}L${pts[6].split(",")[0]},${H - 14}Z`, color: P.color, soft: P.soft });
+    if (d.getDate() === 1) ticks.push({ x: x0 + i * dayW, text: fmt(d, { month: "short" }) });
+    if (dayDiff(d, today) === 0) todayPt = { x: x0 + (i + 0.5) * dayW, y: Y(cd - 0.5) };
+  }
+  flush(27);
+  const tx = shift * 7 * dayW;
+  const tp = todayPt as { x: number; y: number } | null;
+  return (
+    <div className="wave-card">
+      <svg viewBox={`0 0 ${W} ${H}`} className="wave" role="img" aria-label="Your cycle this month">
+        <rect x={x0} y={2} width={7 * dayW} height={H - 16} rx={10} className="wave-band" />
+        <g className={`wave-g ${anim ? "anim" : ""}`} style={{ transform: `translateX(${tx}px)` }}>
+          {segs.map((s, i) => <path key={"a" + i} d={s.area} fill={s.soft} opacity={0.75} />)}
+          {segs.map((s, i) => <path key={"l" + i} d={s.d} stroke={s.color} strokeWidth={4} fill="none" strokeLinecap="round" />)}
+          {labels.map((l, i) => <text key={"t" + i} x={l.x} y={H - 3} className="wave-lbl" fill={l.color}>{l.text}</text>)}
+          {ticks.map((t, i) => (
+            <g key={"m" + i}>
+              <line x1={t.x} x2={t.x} y1={6} y2={H - 16} className="wave-tick" />
+              <text x={t.x + 3} y={12} className="wave-month">{t.text}</text>
+            </g>
+          ))}
+          {tp && (
+            <g>
+              <circle cx={tp.x} cy={tp.y} r={6.5} fill="#fff" stroke="#684259" strokeWidth={2.5} />
+              <circle cx={tp.x} cy={tp.y} r={2.2} fill="#684259" />
+            </g>
+          )}
+        </g>
+      </svg>
     </div>
   );
 }
